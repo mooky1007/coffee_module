@@ -1,0 +1,707 @@
+<!-- 컨텐츠 이동 시 삭제 -->
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.nespresso.com/_ui/generated/crema/styles.1596b6b5ba517472f873.css">
+  <link rel="stylesheet" href="https://www.nespresso.com/_ui/generated/responsiveLoadedFirst.css?v=fd96da20a0167484301a7a19c2a1ec4e246299f7">
+  <link rel="stylesheet" href="https://www.nespresso.com/shared_res/agility/next-components/foundations/v1.1/css/foundations.css">
+  <!-- 컨텐츠 이동 시 삭제 -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Google Tag Manager -->
+  <!-- <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js"
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src =
+        "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "gtmDataObject", "GTM-KH9FPVL");
+  </script> -->
+  <!-- End Google Tag Manager -->
+  <!-- 
+  <script>
+    function gtmTagging(action, label) {
+      gtmDataObject.push({
+        event: "local_event",
+        event_raised_by: "local Market",
+        local_event_category: "sbux-lp-2024",
+        local_event_action: action,
+        local_event_label: label
+      });
+    }
+  </script> -->
+
+  <!-- Google Tag Manager (noscript) -->
+  <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KH9FPVL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <style>
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 100;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-100.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-100.woff") format("woff")
+    }
+
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 300;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-300.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-300.woff") format("woff")
+    }
+
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 400;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-regular.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-regular.woff") format("woff")
+    }
+
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 500;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-500.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-500.woff") format("woff")
+    }
+
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 700;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-700.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-700.woff") format("woff")
+    }
+
+    @font-face {
+      font-family: "Noto Sans KR";
+      font-style: normal;
+      font-weight: 900;
+      src: local(""), url("https://www.nespresso.com/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-900.woff2") format("woff2"), url("/shared_res/agility/fonts/noto_sans_kr/noto-sans-kr-v27-latin_korean-900.woff") format("woff")
+    }
+
+    html {
+      font-size: clamp(5px, 1.302vw, 10px);
+    }
+
+    body {
+      line-height: 1;
+      background-color: #000;
+      word-break: keep-all;
+      margin: 0;
+      padding: 0;
+      font-family: "NespressoLucas", "Noto Sans KR", Helvetica, sans-serif;
+      color: #fff;
+      font-size: .75em;
+      line-height: 1.125rem;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%
+    }
+
+    .visually-hidden {
+      position: absolute;
+      clip: rect(1px 1px 1px 1px);
+      text-indent: -100000px;
+      white-space: nowrap
+    }
+
+
+    /********************************************************** setting **********************************************************/
+    #quadrantCoffee {
+      font-family: "NespressoLucas", "Noto Sans KR", Helvetica, sans-serif;
+      color: #000;
+      line-height: 1.1;
+      background-color: #fff;
+      min-height: 100vh;
+      letter-spacing: -0.05em;
+      word-break: keep-all;
+    }
+
+    #quadrantCoffee img {
+      vertical-align: top;
+    }
+
+    #quadrantCoffee * {
+      font-family: "NespressoLucas", "Noto Sans KR", Helvetica, sans-serif;
+    }
+
+    #quadrantCoffee *,
+    #quadrantCoffee *:before,
+    *:after {
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -o-box-sizing: border-box;
+    }
+
+    #quadrantCoffee .blind {
+      position: absolute !important;
+      overflow: hidden !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      clip: rect(0, 0, 0, 0);
+      border: 0 !important;
+      font-size: 1px
+    }
+
+    #quadrantCoffee img {
+      max-width: 100%;
+    }
+
+    /********************************************************** main **********************************************************/
+    /* section common */
+
+
+
+    /********************************************************** responsive **********************************************************/
+    @media screen and (min-width: 991px) {
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+    }
+
+    @media screen and (max-width:990px) {
+      /* common */
+      .sbn-wrap {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+
+  <div id="main-container">
+    <main id="main">
+      <span id="a11y-main-area" class="visually-hidden" tabindex="-1">메인 컨텐츠를 보고 계십니다.</span>
+      <div id="block-8829160936949" class="free-html" data-label="">
+        <h1 id="hidden-main-heading" class="visually-hidden lang-change" data-kr="스타벅스<sup>®</sup> 커피 by 네스프레소 for 버츄오" data-en="Starbucks<sup>®</sup> Coffee by Nespresso for Vertuo" tabindex="-1">스타벅스<sup>®</sup> 커피 by 네스프레소 for 버츄오</h1>
+        <div id="quadrantCoffee" class="ko">
+          <section role="main" class="common-container">
+            <div class="sbn-wrap">
+              <div class="sbn-container">
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const langChangeFunc = () => {
+      const lang = window.location.pathname.split('/')[2];
+      //const lang = 'en';
+
+      let langChangeElementList = document.querySelectorAll(".lang-change");
+
+      langChangeElementList.forEach(function(item) {
+        if (lang == 'en') {
+          let content = item.getAttribute("data-en");
+          item.innerHTML = content;
+          if (item.tagName.toLowerCase() === 'a') {
+            item.href = item.href.replaceAll('/ko/', '/en/');
+          }
+        } else {
+          let content = item.getAttribute("data-kr");
+          item.innerHTML = content;
+        }
+      });
+    }
+
+    langChangeFunc();
+  </script>
+
+  <style>
+    /* header,footer */
+    @media screen and (max-width: 995px) {
+      .LoginDropdownButton__icon {
+        font-size: 4.4em;
+        top: 14px;
+        left: 14px;
+      }
+
+      .ResponsiveContainer {
+        font-size: 16px
+      }
+
+      .HeaderNavigationBarItem__element {
+        font-size: .8125em
+      }
+
+      .LanguageSwitcher__link {
+        padding: 1em 15px
+      }
+
+      .LanguageSwitcher__button-icon {
+        font-size: .75em
+      }
+
+      .MiniBasketButton,
+      .MiniBasketButtonGuest {
+        font-size: .875em;
+      }
+
+      .MiniBasketButton__quantity {
+        font-size: 2rem
+      }
+
+      .item-cart .util .AddToBagButtonSmall__quantity .AddToBagButtonSmall__icon-sign {
+        font-size: 2.7rem
+      }
+
+      .t-sm-400-caps,
+      .t-sm-400-sl-caps {
+        font-size: 1em;
+        letter-spacing: -0.0625rem
+      }
+
+      footer {
+        font-size: 16px
+      }
+
+      nb-footer-logos section.pb4 {
+        padding-bottom: .75em;
+        font-size: 16px
+      }
+
+      nb-footer-logos li {
+        margin: .25em 1em .25em 0
+      }
+
+      nb-footer-logos li>* {
+        padding: .25em
+      }
+
+      nb-container .cb-inner {
+        margin: 0 1em;
+        font-size: 16px
+      }
+
+      nb-footer-logos img,
+      nb-footer-logos svg {
+        height: 1.5em
+      }
+
+      .nb-informative-stripe__inner {
+        font-size: .75em;
+        letter-spacing: .0625em;
+        padding: .5em
+      }
+
+      .nb-informative-stripe__inner nb-link>:first-of-type {
+        font-size: .75em;
+        letter-spacing: .0625em
+      }
+
+      nb-link>* {
+        margin: -0.375em -0.375em -0.5em;
+        padding: .375em .375em .5em
+      }
+
+      nb-footer-links button::after {
+        border-width: .375em .3125em 0;
+        right: 1em
+      }
+
+      nb-footer-links button,
+      nb-footer-links h3 {
+        padding: 1em 0
+      }
+
+      .t-xs-500,
+      .t-xs-500-sl {
+        font-size: .875em
+      }
+
+      nb-footer-bottom .big-links {
+        margin-bottom: .5em;
+        font-size: 16px
+      }
+
+      nb-footer-bottom .cb-row:last-child {
+        padding: 2em 0 1.5em;
+        font-size: 16px
+      }
+
+      nb-footer-bottom a {
+        line-height: 1em;
+        margin-left: -0.625em;
+        padding-top: .5em;
+        padding-right: .625em;
+        padding-bottom: .5em;
+        padding-left: .625em
+      }
+
+      nb-footer-bottom .socials p {
+        font-size: .875em
+      }
+
+      nb-footer-bottom .socials a {
+        padding-left: .25em;
+        padding-right: .25em
+      }
+
+      nb-footer-bottom .pagetop a {
+        line-height: 1.5em;
+        padding-right: 2em
+      }
+
+      nb-footer-bottom .pagetop nb-icon {
+        right: -1.5em
+      }
+
+      nb-footer-bottom .pagetop nb-icon svg {
+        height: 1em;
+        width: 5.625em
+      }
+
+      nb-footer-bottom .copyright {
+        -moz-column-gap: .75em;
+        column-gap: .75em
+      }
+
+      nb-footer-bottom .copyright a {
+        margin-right: -0.375em;
+        padding-left: .375em;
+        padding-right: .375em
+      }
+
+      nb-footer-bottom .copyright p {
+        font-size: .875em
+      }
+
+      nb-footer-bottom .copyright nb-icon svg {
+        height: 1.5em;
+        width: 5.625em
+      }
+
+      .KR_footer {
+        font-size: 16px
+      }
+
+      .KR_footer li {
+        font-size: .75em;
+        line-height: 1.5
+      }
+
+      .t-2xs-500,
+      .t-2xs-500-sl {
+        font-size: .75em;
+        letter-spacing: .0625em
+      }
+
+      .t-sm-400,
+      .t-sm-400-sl {
+        font-size: 1em
+      }
+
+      nb-dropdown .nb-dropdown__menu>div button {
+        padding: .75em 1em .75em 2.5em
+      }
+
+      nb-dropdown .nb-dropdown__button span:last-child {
+        font-size: 1.2em;
+        line-height: 1em
+      }
+
+      nb-footer-bottom nb-dropdown .nb-dropdown__button span:last-child {
+        letter-spacing: .1em;
+        padding-right: 1em
+      }
+
+      .QuantitySelector {
+        font-size: 16px
+      }
+
+      .QuantitySelector__popin {
+        padding: .625em;
+        width: 17.25em;
+        font-size: .75em
+      }
+
+      .QuantitySelectorCustomField__container {
+        font-size: 16px
+      }
+
+      .PredefinedQuantityList__quantity {
+        width: 3em;
+        height: 3em;
+        letter-spacing: .1em
+      }
+
+      .TextField__label--compact {
+        top: 11px;
+        font-size: .7em
+      }
+
+      .QuantitySelectorCustomField__button-ok {
+        padding: 0 .8em;
+        line-height: 1.625em;
+        font-size: .8em
+      }
+
+      .MiniBasketDropdown__dropdown {
+        font-size: 16px
+      }
+
+      .MiniBasketDropdown__header__title {
+        font-size: 1.25em
+      }
+
+      .BenefitMessage {
+        font-size: 1em
+      }
+
+      .MiniBasketItemCategory {
+        font-size: 1em
+      }
+
+      .MiniBasketItem {
+        font-size: 1em
+      }
+
+      .MiniBasketItem__title {
+        padding: 30px 0;
+        font-size: .75em
+      }
+
+      .AddToBagButtonSmall {
+        font-size: 2.5rem
+      }
+
+      .MiniBasketFooter {
+        font-size: 16px
+      }
+
+      .MiniBasketTotalTable__creditSubTotal,
+      .MiniBasketTotalTable__creditSubTotal-value,
+      .MiniBasketTotalTable__creditTotalPrice,
+      .MiniBasketTotalTable__creditTotalPrice-value,
+      .MiniBasketTotalTable__totalPrice,
+      .MiniBasketTotalTable__totalPrice-value {
+        font-size: 1em
+      }
+
+      .MiniBasketDropdown__content__title {
+        font-size: 1em
+      }
+
+      .QuantitySelectorCustomField__input {
+        height: 7.9em
+      }
+
+      .MiniBasketItemPriceAndName__price {
+        padding: 18px 0 0
+      }
+
+      .MiniBasketTotalTable__cartDisclamerMessage-label {
+        font-size: .75em
+      }
+
+      .MiniBasketFooter__button-checkout {
+        font-size: .875em
+      }
+
+      .MiniBasketDropdown__Link-reorder,
+      .MiniBasketDropdown__Link-shopping {
+        font-size: .875em
+      }
+
+      nb-app-banner nb-cta {
+        margin-left: -1em
+      }
+
+      nb-app-banner a nb-icon {
+        right: .75em
+      }
+
+      nb-cta .button--navigation {
+        width: 3em;
+        height: 3em
+      }
+
+      nb-app-banner nb-icon[icon="24/symbol/nespresso-monogram"] svg {
+        width: 2.5em;
+        height: 2.5em;
+        margin-right: 1em
+      }
+
+      .t-xs-700,
+      .t-xs-700-sl {
+        font-size: .875em;
+        letter-spacing: .0625em
+      }
+
+      nb-app-banner a {
+        bottom: -0.5em;
+        left: 1em;
+        right: -1em;
+        top: -0.5em
+      }
+
+      nb-app-banner .pt3 {
+        padding-top: 3.2em
+      }
+
+      nb-app-banner .pb3 {
+        padding-bottom: 3.2em
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .HeaderNavigationBarDropdown__item .HeaderNavigationBarDropdown__item-heading {
+        font-size: .875em
+      }
+
+      .HeaderNavigationBarDropdown__item .HeaderNavigationBarDropdown__medium-links-item {
+        font-size: .875em
+      }
+
+      .LoginDropdown__register-description {
+        white-space: nowrap;
+        font-size: .75em
+      }
+
+      .LoginDropdown__title {
+        font-size: .875em;
+        line-height: 1.3
+      }
+
+      .LoginForm__forgotten-password {
+        font-size: .875em
+      }
+
+      .LoginForm__submit.DefaultButton--regular {
+        font-size: .875em
+      }
+
+      .DefaultButton.LoginDropdown__register-link.DefaultButton--regular {
+        font-size: .875em
+      }
+
+      .AddToBagButtonSmall__icon-sign {
+        font-size: 1.5em
+      }
+
+      .TextField__label {
+        overflow: visible
+      }
+
+      .AccountMenu {
+        font-size: .8em;
+        line-height: 1.5
+      }
+
+      .LoggedInPanel__logout-button {
+        font-size: .875em;
+        line-height: 1.3
+      }
+
+      .g_cart_component_wrapper {
+        font-size: 1em
+      }
+
+      .g_cart_component p {
+        font-size: .75em;
+        line-height: 2
+      }
+
+      .ta-header-username {
+        font-size: .625em;
+        line-height: 1.5
+      }
+
+      .ta-header-username {
+        font-size: 1em
+      }
+
+      .LoginForm__remember-me-label {
+        font-size: 1em;
+        line-height: 1
+      }
+
+      .LoginDropdown__reorder-title {
+        font-size: .875em;
+        line-height: 1.5
+      }
+
+      .LoginDropdown__reorder a {
+        font-size: .875em
+      }
+
+      .InputCheckbox__label--without-legend {
+        font-size: 1em;
+        line-height: 1
+      }
+
+      .TextField--active .TextField__input--compact {
+        font-size: 1em;
+        line-height: 1
+      }
+
+      .ta-header-password {
+        font-size: 1em;
+        line-height: 1
+      }
+
+      .InputCheckbox__label-value {
+        font-size: .825em
+      }
+
+      .TextField__label-value {
+        line-height: 2.3;
+        font-size: 1.5rem
+      }
+
+      .MiniBasketButton__quantity {
+        font-size: 1em
+      }
+
+      .MiniBasketCartNotification {
+        font-size: 1em
+      }
+
+      .MiniBasketCartNotification .MiniBasketCartNotification__message {
+        font-size: .875em
+      }
+
+      .QuantitySelectorCustomField__input {
+        height: 40px
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .Header__customer {
+        height: 100%;
+        font-size: 16px
+      }
+
+      .pt4 {
+        padding-top: 1em
+      }
+
+      .pb7 {
+        padding-bottom: 2em
+      }
+
+      .pt7 {
+        padding-top: 2em
+      }
+    }
+  </style>
