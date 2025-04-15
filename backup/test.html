@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tri state </title>
+  <script src="https://cdn.jsdelivr.net/npm/dom_craft@1.0.13/dist/dom_craft.umd.min.js"></script>
+  <style>
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .active {
+      background: #eee;
+    }
+
+    .switch_wrap {
+      background: #eee;
+      width: 210px;
+      height: 40px;
+      border-radius: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .switch_wrap[data-state='right'] .ball {
+      left: calc(100% - 20px);
+    }
+
+    .switch_wrap .switch_inner:nth-child(1) {
+      left: 0;
+    }
+
+    .switch_wrap .switch_inner:nth-child(3) {
+      right: 0;
+    }
+
+    .switch_wrap[data-state='left'] .switch_inner:nth-child(1) {
+      left: 20px;
+      opacity: 1;
+    }
+
+    .switch_wrap[data-state='right'] .switch_inner:nth-child(3) {
+      right: 20px;
+      opacity: 1;
+    }
+
+    .switch_wrap[data-state='left'] .ball {
+      left: 20px;
+    }
+
+    .switch_inner {
+      position: relative;
+      transition: 0.3s ease-in-out;
+      flex: 3 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.2;
+      height: 100%;
+      color: #333;
+    }
+
+    .switch_inner:nth-of-type(2) {
+      flex: 1 0 0;
+    }
+
+    .ball {
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+      transition: 0.3s ease-in-out;
+      width: 28px;
+      height: 28px;
+      border-radius: 36px;
+      background: #aaa;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const [a, setA] = Dom.state('center');
+    const [b, setB] = Dom.state('center');
+    const UIButton = (txt1, txt2, statep) => {
+      const [state, setState] = Dom.state('center');
+
+      const UI = Dom.div.set({
+        class: 'switch_wrap',
+        children: [
+          Dom.div.set({
+            class: 'switch_inner',
+            text: txt1,
+            on: {
+              click: function() {
+                if (state() === 'left') {
+                  setState('center')
+                } else {
+                  setState('left')
+                }
+              }
+            },
+          }),
+          Dom.div.set({
+            class: 'switch_inner',
+            text: '',
+            on: {
+              click: function() {
+                setState('center')
+              }
+            },
+          }),
+          Dom.div.set({
+            class: 'switch_inner',
+            text: txt2,
+            on: {
+              click: function() {
+                if (state() === 'right') {
+                  setState('center')
+                } else {
+                  setState('right')
+                }
+              }
+            },
+          }),
+          Dom.div.set({
+            class: 'ball'
+          }),
+        ]
+      })
+
+      Dom.effect(() => {
+        UI.set({
+          dataset: {
+            state: state()
+          }
+        })
+        statep(state())
+      }, [state])
+
+      return UI
+    }
+
+    const q1 = Dom.div.set({
+      style: {
+        borderRight: '1px solid #ddd',
+        borderBottom: '1px solid #ddd'
+      }
+    })
+    const q2 = Dom.div.set({
+      style: {
+        borderBottom: '1px solid #ddd'
+      }
+    })
+    const q3 = Dom.div.set({
+      style: {
+        borderRight: '1px solid #ddd',
+      }
+    })
+    const q4 = Dom.div
+
+    const wrap = Dom.div.set({
+      style: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        border: '1px solid #ddd',
+        width: '240px',
+        height: '240px'
+      },
+      children: [
+        q1, q2, q3, q4
+      ]
+    })
+
+    Dom.effect(() => {
+      if (a() === 'center' && b() === 'center') {
+        q1.class('active');
+        q2.class('active');
+        q3.class('active');
+        q4.class('active');
+      }
+
+      if (a() === 'right' && b() === 'center') {
+        q1.removeClass('active');
+        q2.removeClass('active');
+        q3.class('active');
+        q4.class('active');
+      }
+
+      if (a() === 'left' && b() === 'center') {
+        q1.class('active');
+        q2.class('active');
+        q3.removeClass('active');
+        q4.removeClass('active');
+      }
+
+      if (a() === 'center' && b() === 'right') {
+        q1.class('active');
+        q2.removeClass('active');
+        q3.class('active');
+        q4.removeClass('active');
+      }
+
+      if (a() === 'center' && b() === 'left') {
+        q1.removeClass('active');
+        q2.class('active');
+        q3.removeClass('active');
+        q4.class('active');
+      }
+
+      if (a() === 'right' && b() === 'right') {
+        q1.removeClass('active');
+        q2.removeClass('active');
+        q3.class('active');
+        q4.removeClass('active');
+      }
+
+      if (a() === 'right' && b() === 'left') {
+        q1.removeClass('active');
+        q2.removeClass('active');
+        q3.removeClass('active');
+        q4.class('active');
+      }
+
+      if (a() === 'left' && b() === 'right') {
+        q1.class('active');
+        q2.removeClass('active');
+        q3.removeClass('active');
+        q4.removeClass('active');
+      }
+
+      if (a() === 'left' && b() === 'left') {
+        q1.removeClass('active');
+        q2.class('active');
+        q3.removeClass('active');
+        q4.removeClass('active');
+      }
+    }, [a, b])
+
+    Dom.body.append([UIButton('부드러운', '강렬한', setA), UIButton('산뜻한', '고소한', setB), wrap])
+  </script>
+  <script>
+    window.coffeeData = [{
+        name: "고객 데이터",
+        value: 999
+      },
+      {
+        name: "추가 데이터",
+        value: 555
+      }
+    ];
+
+    (()=>{var u=(s,t,r)=>new Promise((e,i)=>{var a=o=>{try{l(r.next(o))}catch(d){i(d)}},h=o=>{try{l(r.throw(o))}catch(d){i(d)}},l=o=>o.done?e(o.value):Promise.resolve(o.value).then(a,h);l((r=r.apply(s,t)).next())});var c=class{constructor(){}static qs(t){return new n(document.querySelector(t))}static qsa(t){return document.querySelectorAll(t)}static el(t){return new n(document.createElement(t))}static get presets(){return{ani:{fadeIn:[{opacity:0},{opacity:1}],fadeOut:[{opacity:1},{opacity:0}],slideUp:[{transform:"translateY(10px)"},{transform:"translateY(0)"}],slideDown:[{transform:"translateY(-10px)"},{transform:"translateY(0)"}]}}}static get body(){return new n(document.querySelector("body"))}static inView(t){let r=new IntersectionObserver(([e])=>{e.isIntersecting?e.target.in&&e.target.in():e.target.out&&e.target.out()},{threshold:t||.2});return r.watch=e=>{e.in&&(e.el.in=e.in),e.out&&(e.el.out=e.out),r.observe(e.el)},r}static state(t){let r=t,e=new Set,i=()=>r;return i.sub=a=>e.add(a),i.unsub=a=>e.delete(a),[i,a=>{r=a,e.forEach(h=>h())}]}static effect(t,r){r.forEach(e=>e.sub(t)),t()}static delay(t){return new Promise(r=>{setTimeout(()=>r(),t)})}static injectCss(t){let r=document.createElement("style");r.textContent=t,document.head.append(r)}static get span(){return new n("span")}static get table(){return new n("table")}static get thead(){return new n("thead")}static get tbody(){return new n("tbody")}static get tfoot(){return new n("tfoot")}static get tr(){return new n("tr")}static get th(){return new n("th")}static get td(){return new n("td")}static get p(){return new n("p")}static get i(){return new n("i")}static get label(){return new n("label")}static get h1(){return new n("h1")}static get h2(){return new n("h2")}static get h3(){return new n("h3")}static get h4(){return new n("h4")}static get h5(){return new n("h5")}static get h6(){return new n("h6")}static get div(){return new n("div")}static get img(){return new n("img")}static get section(){return new n("section")}static get article(){return new n("article")}static get figure(){return new n("figure")}static get header(){return new n("header")}static get nav(){return new n("nav")}static get aside(){return new n("aside")}static get footer(){return new n("footer")}static get main(){return new n("main")}static get ol(){return new n("ol")}static get ul(){return new n("ul")}static get button(){return new n("button")}static get input(){return new n("input")}static get select(){return new n("select")}static get legend(){return new n("legend")}static get textarea(){return new n("textarea")}static get fieldset(){return new n("fieldset")}static get option(){return new n("option")}static get form(){return new n("form")}static get li(){return new n("li")}static get a(){return new n("a")}},n=class s{constructor(t){this.el=typeof t=="string"?document.createElement(t):t}set(t={}){return this.config=t,typeof t=="string"?this.text(t):Object.entries(t).forEach(([r,e])=>{r in this?this[r](e):this[r]=e}),this}id(t){return this.el.id=t,this}text(t){return this.el.textContent=t,this}html(t){return this.el.innerHTML=t,this}placeholder(t){return this.el.placeholder=t,this}type(t){return this.el.type=t,this}src(t){return this.el.src=t,this}href(t){return this.el.href=t,this}class(t){return t.split(" ").length===1?this.el.classList.add(t):t.split(" ").forEach(r=>{this.el.classList.add(r.trim())}),this}attr(t){return Object.entries(t).forEach(([r,e])=>{this.el.setAttribute(r,e)}),this}style(t){return Object.entries(t).forEach(([r,e])=>this.el.style[r]=e),this}dataset(t){return Object.entries(t).forEach(([r,e])=>{this.el.dataset[r]=e}),this}animations(t){if(Array.isArray(t))t.forEach(r=>{let{keyframe:e,options:i}=r;this.animate(e,i)});else{let{keyframe:r,options:e}=t;this.animate(r,e)}return this}animate(t,r){return u(this,null,function*(){this.ani=this.el.animate(t,r),yield this.ani.finished,this.onAnimationEnd&&this.onAnimationEnd.call(this)})}children(t,r=!0){return Array.isArray(t)||(t=[t]),t.forEach(e=>u(this,null,function*(){if(e instanceof s&&(r?this.el.append(e.el):this.el.prepend(e.el),e.introAnimation)){let{keyframe:i,options:a}=e.introAnimation;e.el.animate(i,a)}})),this}on(t){return Object.entries(t).forEach(([r,e])=>{r!=="animationEnd"?this.el.addEventListener(r,e.bind(this)):this.onAnimationEnd=e}),this}remove(){return u(this,null,function*(){if(this.outroAnimation){let{keyframe:t,options:r}=this.outroAnimation;return yield this.el.animate(t,r).finished,this.el.remove()}return this.el.remove()})}replace(t){this.el.innerHTML="",this.children(t)}append(t){this.children(t)}removeClass(t){this.el.classList.remove(t)}prepend(t){this.children(t,!1)}};var g=s=>c.button.set({text:s}),m=g;var w=window.coffeeData||[{name:"\uAE30\uBCF8\uAC12",value:123}];window.addEventListener("DOMContentLoaded",()=>{c.body.set({children:w.map(s=>m(`${s.name}: ${s.value}`))})});})();
+  
+    </script>
+</body>
+
+</html>

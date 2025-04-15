@@ -1,0 +1,100 @@
+#quadrantCoffee .key_section { width: 100%; padding-bottom: 150px; background: url('/images/key_section_background.png') no-repeat top / cover; display: flex; flex-direction: column; align-items: center; } 
+#quadrantCoffee .section_header { display: flex; align-items: center; flex-direction: column; gap: 30px; padding-top: 100px; padding-bottom: 30px; } 
+#quadrantCoffee .section_header h2 { font-size: 50px; color: #fff; letter-spacing: -0.05em; font-weight: 400; text-align: center; } 
+#quadrantCoffee .section_header h2 strong { font-weight: 700; } 
+#quadrantCoffee .key_section_header ul { display: flex; gap: 40px; justify-content: center; } 
+#quadrantCoffee .key_section_header ul li:not(.active) { opacity: 0.5; } 
+#quadrantCoffee .key_section_header ul li button { display: flex; gap: 6px; align-items: center; padding-top: 7px; padding-bottom: 10px; } 
+#quadrantCoffee .key_section_header ul li button span { color: #fff; font-weight: 700; font-size: 26px; line-height: 100%; letter-spacing: -0.05em; text-align: center; } 
+#quadrantCoffee i[class^=ico-] { background-color: magenta; width: 30px; height: 30px; background-repeat: no-repeat; background-size: contain; background-position: center; } 
+#quadrantCoffee i.ico-vertuo { background-image: url('/images/ico-vertuo.png'); background-color: initial; } 
+#quadrantCoffee i.ico-original { background-image: url('/images/ico-original.png'); background-color: initial; } 
+#quadrantCoffee i.ico-all { width: 22px; height: 22px; background-image: url('/images/ico-all.png'); background-color: initial; } 
+#quadrantCoffee i.ico-decaf { width: 20px; height: 20px; background-image: url('/images/ico-decaf.png'); background-color: initial; } 
+#quadrantCoffee i.ico-ice { width: 17px; height: 30px; background-image: url('/images/ico-ice.png'); background-color: initial; } 
+#quadrantCoffee i.ico-starbucks { width: 34px; height: 34px; background-image: url('/images/ico-starbucks.png'); background-color: initial; } 
+#quadrantCoffee i.ico-milk { width: 26px; height: 27px; background-image: url('/images/ico-milk.png'); background-color: initial; } 
+#quadrantCoffee button { position: relative; } 
+#quadrantCoffee button:active { transform: scale(0.98); } 
+#quadrantCoffee .key_section_body { display: flex; justify-content: center; align-items: flex-start; position: relative; width: 68.64vw; } 
+#quadrantCoffee .key_section_body .main_content { overflow: hidden; width: 100%; aspect-ratio: 1318/1363; max-width: 1318px; background-color: #f6f2eb; border-radius: 80px; border: 1px solid #5334214D; box-shadow: 0px 4px 20px 0px #22120F40 inset; position: relative; display: flex; justify-content: center; align-items: center; } 
+#quadrantCoffee .key_section_body .legend_group { position: absolute; width: 100%; height: 100%; pointer-events: none; } 
+#quadrantCoffee .key_section_body .legend_group .legend { pointer-events:fill; display: flex; justify-content: center; align-items: center; width: 200px; height: 48px; position: absolute; display: flex; transform-origin: center; text-align: center; } 
+#quadrantCoffee .key_section_body .legend_group .legend button { display: block; width: 100%; height: 100%; } 
+#quadrantCoffee .key_section_body .legend_group .legend span { font-weight: 700; font-size: 20px; letter-spacing: -0.05em; text-align: center; padding: 12px 30px; } 
+#quadrantCoffee .key_section_body .legend_group .legend[data-position=top] { background-color: #B070511A; color: #B07051; top: 30px; left: 50%; transform: translateX(-50%); } 
+#quadrantCoffee .key_section_body .legend_group .legend[data-position=right] { background-color: #F2737E1A; color: #F2737E; right: -36px; top: 50%; transform: translateY(-50%) rotate(90deg); } 
+#quadrantCoffee .key_section_body .legend_group .legend[data-position=bottom] { background-color: #544B501A; color: #544B50; bottom: 30px; left: 50%; transform: translateX(-50%); } 
+#quadrantCoffee .key_section_body .legend_group .legend[data-position=left] { background-color: #FFBA401A; color: #FFBA40; left: -36px; top:50%; transform: translateY(-50%) rotate(-90deg); } 
+#quadrantCoffee .key_section_body .filter_group { position: absolute; left: -80px; transform: translateX(-100%); height: 100%; padding-top: 40px; } 
+#quadrantCoffee .key_section_body .filter_group ul { position:sticky; top: 40px; display: flex; flex-direction: column; gap: 6px; } 
+#quadrantCoffee .key_section_body .filter_item { width: 150px; height: 50px; padding: 6px; border-radius: 50px; background: #513223; color: #ad9a90; display: flex; justify-content: center; align-items: center; } 
+#quadrantCoffee .key_section_body .filter_item input[type=checkbox] { display: none; } 
+#quadrantCoffee .key_section_body .filter_item label { position: relative; display: flex; width: 100%; height: 100%; align-items: center; } 
+#quadrantCoffee .key_section_body .filter_item label > span { display: flex; width: 100%; height: 100%; justify-content: flex-start; align-items: center; font-weight: 700; font-size: 18px; line-height: 19px; letter-spacing: -0.05em; text-align: center; padding-left: 14px; user-select: none; transition: 0.2s ease-in-out; transition-delay: 0.1s; } 
+#quadrantCoffee .key_section_body .filter_item .filter_ball { position: absolute; left: 100%; transform: translateX(-100%); display: flex; width: 38px; height: 38px; justify-content: center; align-items: center; border-radius: 30px; background: #f6f2eb; box-shadow: 0px 4px 4px 0px #3E261C; transition: 0.3s ease-in-out; overflow: hidden; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) { background: #F6F2EB } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball { left:0; transform: none; background: #513223; box-shadow: 0px 4px 4px 0px #AAAAAA80; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball i { filter: brightness(0) invert(1); } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) label > span { color: #513223; padding-left: 52px; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball:has(.ico-decaf) { background: #94473C; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball:has(.ico-ice) { background: #4BADD1; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball:has(.ico-milk) { background: #D3AB89; } 
+#quadrantCoffee .key_section_body .filter_item .filter_ball:has(.ico-starbucks),
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked) .filter_ball:has(.ico-starbucks) { background: #0D6243; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked):has(.ico-decaf) label > span { color: #94473C; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked):has(.ico-ice) label > span { color: #4BADD1; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked):has(.ico-milk) label > span { color: #D3AB89; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked):has(.ico-starbucks) label > span { color: #0D6243; } 
+#quadrantCoffee .key_section_body .filter_item:has(input[type=checkbox]:checked):has(.ico-starbucks) .filter_ball i { filter: none; } 
+#quadrantCoffee .key_section_body .quadrant_content { transition: 0.1s linear; width: 80%; min-width: 1000px; aspect-ratio: 1/1; position: relative; background-image: url('/images/main_content_grid.png'); background-position: center; background-repeat: no-repeat; background-size: 100%; } 
+#quadrantCoffee .key_section_body .quadrant_item { position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%; cursor: pointer; } 
+@media (hover: hover) and (pointer: fine){
+ #quadrantCoffee .key_section_body .quadrant_item:hover img { transform: scale(1.1); } 
+ }
+
+ @media screen and (max-width: 768px){
+  #quadrantCoffee .section_header h2 {font-size: 32px;}
+ #quadrantCoffee .key_section_body { width: 90%; } 
+ #quadrantCoffee .key_section_body .main_content { border-radius: 5px; } 
+ #quadrantCoffee .key_section_body .legend_group { display: none; } 
+ #quadrantCoffee .key_section_body .quadrant_content { background-size:contain; } 
+ }
+
+#quadrantCoffee .key_section_body .quadrant_item article { display: flex; flex-direction: column; justify-content: center; align-items: center; width: 80px; height: 90px; } 
+#quadrantCoffee .key_section_body .quadrant_item .image_area { width: 100%; height: 60px; } 
+#quadrantCoffee .key_section_body .quadrant_item .image_area.no-image img { transition: none; } 
+#quadrantCoffee .key_section_body .quadrant_item .image_area img { width: 100%; height: 100%; object-fit: cover; transition: 0.2s ease-in-out; } 
+#quadrantCoffee .key_section_body .quadrant_item .text_area { flex: 1 0 auto; display: flex; justify-content: center; } 
+#quadrantCoffee .key_section_body .quadrant_item .text_area p { font-weight: 500; font-size: 14px; letter-spacing: -0.05em; text-align: center; } 
+#quadrantCoffee .product_section { width: 100%; background: url('/images/product_section_background.png') no-repeat top / cover; display: flex; flex-direction: column; align-items: center; padding: 130px 0; gap: 30px; } 
+#quadrantCoffee .product_section .section_header h2 { color: #000; } 
+#quadrantCoffee .product_section_body { width: 100%; max-width: 1480px; } 
+#quadrantCoffee .product_section_body > article { max-width: 1480px; padding: 40px 0 0; display: flex; flex-direction: column; gap: 30px; align-items: center; position: relative; } 
+#quadrantCoffee .product_section_body > article h3 { font-weight: 700; font-size: 36px; letter-spacing: -0.05em; text-align: center; } 
+#quadrantCoffee .product_section_body > article h3 span { font-weight: 600; } 
+#quadrantCoffee .product_section_body > article .product_list { width: 100%; max-width: 1335px; padding: 0 12.5px; } 
+#quadrantCoffee .product_section_body > article .product_list .swiper-wrapper { padding-bottom: 40px; } 
+#quadrantCoffee .product_section_body > article .product_list .swiper-slide { width: 420px; height: 215px; background: #F6F2EB; display: flex; gap: 20px; padding: 40px 28px; border-radius: 10px; box-shadow: 0px 4px 12.5px 0px #22120F0D; } 
+#quadrantCoffee .product_section_body > article .swiper-button-next,
+#quadrantCoffee .product_section_body > article .swiper-button-prev { width: 60px; height: 60px; top: auto; bottom: calc(40px + 107.5px - 30px); display: flex; justify-content: center; align-items: center; } 
+#quadrantCoffee .product_section_body > article .swiper-button-next::after,
+#quadrantCoffee .product_section_body > article .swiper-button-prev::after { content: ''; width: 40px; height: 40px; } 
+#quadrantCoffee .product_section_body > article .swiper-button-next::after { background: url('/images/slide_next.png') no-repeat center / 40px 40px; } 
+#quadrantCoffee .product_section_body > article .swiper-button-prev::after { background: url('/images/slide_prev.png') no-repeat center / 40px 40px; } 
+#quadrantCoffee .product_section_body .product_list .img_area { flex: 0 0 auto; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center; } 
+#quadrantCoffee .product_section_body .product_list .infor_area { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .prd_title { font-weight: 700; font-size: 24px; letter-spacing: -0.05em; text-align: center; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .prd_desc1 { color: #000; font-weight: 500; font-size: 18px; letter-spacing: -0.05em; text-align: center; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .prd_desc2 { color: #666; font-weight: 400; font-size: 16px; letter-spacing: -0.05em; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .input_group { display: flex; align-items: center; gap: 10px; width: 100%; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .prd_price { flex: 1 0 0; font-weight: 500; font-size: 22px; letter-spacing: -0.05em; text-align: left; min-width: 0; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .count_control { flex: 0 1 70px; display: flex; min-width: 0; align-items: center; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .count_control button { flex: 0 0 13px; width: 13px; height: 13px; display: flex; justify-content: center; align-items: center; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .count_control button[data-role='plus'] { background: url('/images/ico-plus.png') no-repeat center / 13px; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .count_control button[data-role='minus'] { background: url('/images/ico-minus.png') no-repeat center / 13px; } 
+#quadrantCoffee .product_section_body .product_list .infor_area .count_control input[type=number] { width: auto; flex: 1 1 auto; min-width: 0; text-align: center; background: transparent; border: none; font-family: Nespresso Lucas; font-weight: 400; font-size: 18px; letter-spacing: -0.05em; height: 100%; } 
+#quadrantCoffee input[type=number]::-webkit-inner-spin-button,
+#quadrantCoffee input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; } 
+#quadrantCoffee input[type=number] { -moz-appearance: textfield; appearance: none; } 
+#quadrantCoffee .product_section_body .product_list .infor_area button[data-role=add-cart] { flex: 0 0 auto; width: 50px; height: 50px; border-radius: 50px; background-color: #257a57; background-image: url('/images/ico-addcart.png'); background-repeat: no-repeat; background-position: center; background-size: 20px; } 
