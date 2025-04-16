@@ -11,10 +11,19 @@
 @use "../js/components/QuadrantsArea/QuadrantsArea.scss" as *;
 @use "../js/components/Filter/Filter.scss" as *;
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 #wrapper {
+  & > section:first-of-type {
+    scroll-snap-align: start;
+  }
+
   @include MachineSelector;
 
   .quadrants_header {
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     gap: 10px;

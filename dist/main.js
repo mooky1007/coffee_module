@@ -648,7 +648,7 @@
     t.effect(() => {
       QuadrantsFilter_default.update();
       QuadrantsItemContainer.update();
-      scrollTo(FilterWrap, "bottom");
+      if (filter().length !== 0) scrollTo(FilterWrap, "bottom");
     }, [filter]);
     t.effect(() => {
       setQuadrantsMode(selectedQuadrant());

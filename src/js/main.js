@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
     Dom.effect(() => {
         QuadrantsFilter.update();
         QuadrantsItemContainer.update();
-        scrollTo(FilterWrap, 'bottom');
+        if (filter().length !== 0) scrollTo(FilterWrap, 'bottom');
     }, [filter]);
 
     Dom.effect(() => {
@@ -93,6 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         await Dom.delay(200);
         if (selectedQuadrant() !== 'all') setSelectedQuadrant('all');
+
         if (!firstInit) scrollTo(TitleWrap);
         else firstInit = false;
     }, [machine]);

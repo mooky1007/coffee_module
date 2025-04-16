@@ -116,14 +116,14 @@ button.active {background: #111; color: #fff;}
 #wrapper {background: #fff; width: 100%; min-height: 100vh; max-width: 425px; margin: 0 auto; padding-bottom: 3.75rem;}
 @media screen and (max-width: 425px) {#wrapper { max-width: 100%;}
 }
-#wrapper > section:first-of-type {background: #ddd;}
+#wrapper > section:first-of-type {background: #ddd; scroll-snap-align: start;}
 #wrapper > section:first-of-type h1 {padding: 0.625rem;}
 #wrapper section {padding: 0.625rem 1.25rem;}
 #wrapper section h2 + ul,
 #wrapper section h3 + ul {margin-top: 0.625rem; padding: 0.625rem 0;}
 #wrapper section + section {margin-top: 0.625rem;}
 #wrapper section ul {display: flex; justify-content: space-between; align-items: center; gap: 0.3125rem;}
-#wrapper .product_list {margin-top: 0; border-top: 6px solid #eee; padding-top: 1.875rem;}
+#wrapper .product_list {scroll-snap-align: start; margin-top: 0; border-top: 6px solid #eee; padding-top: 1.875rem;}
 #wrapper .product_list h2 {text-align: left;}
 #wrapper .product_list ul {display: flex; width: 100%; flex-direction: column; justify-content: flex-start; gap: 0.625rem;}
 #wrapper .product_list ul li {display: flex; width: 100%; margin: 0 auto; justify-content: flex-start; align-items: flex-start; border-radius: 0.3125rem; border: 1px solid #ddd; padding: 1.25rem; gap: 1.25rem;}
@@ -138,10 +138,11 @@ button.active {background: #111; color: #fff;}
 @keyframes wave {0% { transform: translateX(-100%);}
   100% {transform: translateX(200%);}
 }
+html {scroll-snap-type: y mandatory;}
 #wrapper .select_machine {aspect-ratio: 1/0.75; display: flex; justify-content: center; align-items: center; flex-direction: column;}
 #wrapper .select_machine ul {justify-content: flex-start; gap: 0.625rem;}
 #wrapper .select_machine ul button {padding: 0.625rem 1.25rem; font-size: 1rem;}
-#wrapper .quadrants_header {display: flex; flex-direction: column; gap: 10px; height: 9.0625rem; border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 1.25rem;}
+#wrapper .quadrants_header {scroll-snap-align: start; display: flex; flex-direction: column; gap: 10px; height: 9.0625rem; border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 1.25rem;}
 #wrapper .quadrants_header ul {position: relative; width: 100%; align-items: center; flex: 1 0 auto;}
 #wrapper .quadrants_header h2 {text-align: left; flex: 1 0 0;}
 #wrapper .quadrants_header h2 strong {position: relative;}
