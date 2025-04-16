@@ -1,0 +1,20 @@
+@use "../../../scss/abstracts/functions" as *;
+
+@mixin QuadrantsFilter {
+  ul.selected_filter {
+    position: absolute;
+    height: rem(20px);
+    justify-content: flex-start !important;
+    margin-bottom: rem(20px);
+    li {
+      font-size: rem(11px);
+      border-radius: rem(20px);
+      padding: rem(5px) rem(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      background: #333;
+    }
+  }
+}

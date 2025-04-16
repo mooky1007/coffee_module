@@ -1,0 +1,32 @@
+@use "../../../scss/abstracts/functions" as *;
+
+@mixin QuadrantsTitle {
+  ul {
+    position: relative;
+  }
+  h2 {
+    padding-top: rem(10px);
+    margin-bottom: rem(10px);
+  }
+  button {
+    display: none;
+  }
+
+  &.scale_up {
+    button {
+      background: #333;
+      border-radius: 3px;
+      width: rem(42px);
+      height: rem(42px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        top: rem(1px);
+        font-size: rem(18px);
+        color: #fff;
+        position: relative;
+      }
+    }
+  }
+}

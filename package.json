@@ -19,6 +19,7 @@
         "gulp-file-include": "^2.3.0",
         "gulp-inject": "^5.0.5",
         "gulp-javascript-obfuscator": "^1.1.6",
+        "gulp-plumber": "^1.2.1",
         "gulp-postcss": "^10.0.0",
         "gulp-prettier": "^6.0.0",
         "gulp-rename": "^2.0.0",
@@ -27,10 +28,9 @@
         "gulp-size": "^5.0.0",
         "gulp-uglify": "^3.0.2",
         "gulp-webp": "^5.0.0",
-        "sass": "^1.86.3",
-        "gulp-plumber": "^1.2.1"
+        "sass": "^1.86.3"
     },
     "dependencies": {
-        "dom_craft": "^1.1.11"
+        "dom_craft": "^1.1.12"
     }
 }

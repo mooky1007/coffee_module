@@ -1,0 +1,19 @@
+@use "../../../scss/abstracts/functions" as *;
+
+@mixin MachineSelector {
+  .select_machine {
+    aspect-ratio: 1/0.75;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    ul {
+      justify-content: flex-start;
+      gap: rem(10px);
+      button {
+        padding: rem(10px) rem(20px);
+        font-size: rem(16px);
+      }
+    }
+  }
+}

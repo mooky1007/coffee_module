@@ -1,0 +1,67 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/mixins" as *;
+
+* {
+  font-family: "Pretendard", sans-serif !important;
+  box-sizing: border-box;
+  color: #222;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+h1 {
+  font-size: rem(28px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+h2 {
+  font-size: rem(24px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+h3 {
+  font-size: rem(16px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+p {
+  font-size: rem(12px);
+  line-height: 1.2;
+}
+
+button {
+  font-size: rem(12px);
+  border: none;
+  background: #eee;
+  border-radius: rem(100px);
+  padding: rem(5px) rem(10px);
+  cursor: pointer;
+
+  &.active {
+    background: #111;
+    color: #fff;
+  }
+}
+
+body {
+  background: #333;
+}
+
+.arrow_down {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #222;
+  border-left: 2px solid #222;
+  transform: rotate(-45deg) translate(-50%, -50%);
+  transform-origin: center;
+}

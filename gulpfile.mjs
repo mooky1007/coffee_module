@@ -12,6 +12,8 @@ import autoprefixer from 'autoprefixer';
 import prettier from 'gulp-prettier';
 import esbuild from 'gulp-esbuild';
 import plumber from 'gulp-plumber';
+import browserSync from 'browser-sync';
+const reload = browserSync.reload;
 const sass = gulpSass(dartSass);
 
 export const js = () => {
@@ -33,9 +35,13 @@ export const js = () => {
                 // platform: 'browser',
             })
         )
-        .pipe(dest('dist'));
+        .pipe(dest('dist'))
+        .pipe(reload({ stream: true }));
 };
 
+export const html = () => {
+    return src(`src/index.html`).pipe(reload({ stream: true }));
+};
 export const scss = () => {
     return src(`src/scss/main.scss`)
         .pipe(
@@ -62,9 +68,22 @@ export const scss = () => {
             })
         )
         .pipe(replace(/^\s*[\r\n]/gm, ''))
-        .pipe(dest('dist'));
+        .pipe(dest('dist'))
+        .pipe(reload({ stream: true }));
 };
 export const build = parallel(js, scss);
 
-watch('src/js/**/*.js', js);
-watch('src/scss/**/*.scss', scss);
+export const serve = () => {
+    browserSync.init({
+        server: {
+            baseDir: './',
+        },
+        port: 5500,
+        open: false,
+        notify: false,
+    });
+
+    watch('src/*.html', html);
+    watch('src/**/*.js', js);
+    watch('src/**/*.scss', scss);
+};

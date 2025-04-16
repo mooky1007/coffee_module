@@ -1,9 +1,29 @@
-@use "abstracts/variables";
-@use "abstracts/mixins";
-@use "abstracts/functions";
+@use "./abstracts/functions" as *;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@use "base/reset";
+@use "base/common";
+
+@use "layout/_layout_main";
+
+@use "../js/components/MachineSelector/MachineSelector.scss" as *;
+@use "../js/components/QuadrantsTitle/QuadrantsTitle.scss" as *;
+@use "../js/components/QuadrantsFilter/QuadrantsFilter.scss" as *;
+@use "../js/components/QuadrantsArea/QuadrantsArea.scss" as *;
+@use "../js/components/Filter/Filter.scss" as *;
+
+#wrapper {
+  @include MachineSelector;
+
+  .quadrants_header {
+    border-top: 6px solid #eee;
+    margin-top: rem(30px);
+    padding-top: rem(30px);
+    padding-bottom: rem(40px);
+
+    @include QuadrantsTitle;
+    @include QuadrantsFilter;
+  }
+
+  @include QuadrantsArea;
+  @include Filter;
 }
