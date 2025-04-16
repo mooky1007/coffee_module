@@ -111,8 +111,8 @@ button.active {background: #111; color: #fff;}
 @media screen and (max-width: 768px) {body { background: #fff;}
 }
 .arrow_down {flex: 0 0 auto; width: 10px; height: 10px; border-bottom: 2px solid #222; border-left: 2px solid #222; transform: rotate(-45deg) translate(-50%, -50%); transform-origin: center;}
-#wrapper {background: #fff; width: 100%; min-height: 100vh; max-width: 425px; margin: 0 auto; padding-top: 1.25rem; padding-bottom: 3.75rem;}
-@media screen and (max-width: 425px) {#wrapper { max-width: 100%;}
+#wrapper {background: #fff; width: 100%; min-height: 100vh; max-width: 375px; margin: 0 auto; padding-top: 1.25rem; padding-bottom: 3.75rem;}
+@media screen and (max-width: 375px) {#wrapper { max-width: 100%;}
 }
 #wrapper section {padding: 0.625rem 1.25rem;}
 #wrapper section h2 + ul,
@@ -142,9 +142,9 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_header h2 {text-align: left; flex: 1 0 0;}
 #wrapper .quadrants_header h2 strong {position: relative;}
 #wrapper .quadrants_header h2 strong:nth-of-type(2) {font-weight: 700;}
-#wrapper .quadrants_header button {transition: opacity 0.8s ease-in-out; opacity: 0; background: #333; border-radius: 3px; width: 2.25rem; height: 2.25rem; display: flex; justify-content: center; align-items: center;}
+#wrapper .quadrants_header button {cursor: default; transition: opacity 0.8s ease-in-out; opacity: 0; background: #333; border-radius: 3px; width: 2.25rem; height: 2.25rem; display: flex; justify-content: center; align-items: center;}
 #wrapper .quadrants_header button span {top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
-#wrapper .quadrants_header.scale_up button {opacity: 1;}
+#wrapper .quadrants_header.scale_up button {cursor: pointer; opacity: 1;}
 #wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; flex: 0 1 0;}
 #wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
 #wrapper .quadrants_body {position: relative; overflow: hidden; padding: 0; margin: 0 0 10px;}
@@ -178,10 +178,11 @@ button.active {background: #111; color: #fff;}
 #wrapper .filter_container .filter_header div {position: relative; width: 2rem; height: 2rem;}
 #wrapper .filter_container .filter_section {transition: 0.4s ease-in-out; max-height: 300px; padding-bottom: 1.25rem; overflow: hidden;}
 #wrapper .filter_container ul.filter_section {width: 100%; display: grid; grid-template-columns: 1fr;}
-#wrapper .filter_container ul.filter_section li {width: 100%; border: 1px solid #e1e1e1; border-radius: 3px;}
+#wrapper .filter_container ul.filter_section li {transition: 0.3s ease-in-out; width: 100%; border: 1px solid #e1e1e1; border-radius: 3px;}
 #wrapper .filter_container ul.filter_section li label {display: flex; cursor: pointer; justify-content: flex-start; align-items: center; padding: 0.9375rem 0.625rem;}
-#wrapper .filter_container ul.filter_section li label span {position: relative; width: 16px; height: 16px; border-radius: 20px; border: 1px solid #ddd; margin-right: 0.625rem;}
+#wrapper .filter_container ul.filter_section li label span {position: relative; width: 16px; height: 16px; border-radius: 20px; border: 1px solid #ddd; margin-right: 0.625rem; transition: 0.3s ease-in-out;}
+#wrapper .filter_container ul.filter_section li label span::after {content: ""; transition: 0.3s ease-in-out; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; border-radius: 10px;}
 #wrapper .filter_container ul.filter_section li label p {line-height: 16px;}
 #wrapper .filter_container ul.filter_section li input {display: none;}
 #wrapper .filter_container ul.filter_section li input:checked + span {border-color: #999;}
-#wrapper .filter_container ul.filter_section li input:checked + span::after {content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; background: #666; border-radius: 10px;}
+#wrapper .filter_container ul.filter_section li input:checked + span::after {background: #666;}
