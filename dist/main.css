@@ -108,6 +108,8 @@ h3 {font-size: 1rem; font-weight: 600; line-height: 1.2; text-align: center;}
 p {font-size: 0.75rem; line-height: 1.2;}
 button {font-size: 0.75rem; border: none; background: #eee; border-radius: 6.25rem; padding: 0.3125rem 0.625rem; cursor: pointer;}
 button.active {background: #111; color: #fff;}
+@media screen and (max-width: 768px) {body { background: #fff;}
+}
 .arrow_down {flex: 0 0 auto; width: 10px; height: 10px; border-bottom: 2px solid #222; border-left: 2px solid #222; transform: rotate(-45deg) translate(-50%, -50%); transform-origin: center;}
 #wrapper {background: #fff; width: 100%; min-height: 100vh; max-width: 425px; margin: 0 auto; padding-top: 1.25rem; padding-bottom: 3.75rem;}
 @media screen and (max-width: 425px) {#wrapper { max-width: 100%;}
