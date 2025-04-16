@@ -7,11 +7,18 @@
   min-height: 100vh;
   max-width: 425px;
   margin: 0 auto;
-  padding-top: rem(20px);
   padding-bottom: rem(60px);
 
   @include respond(425px) {
     max-width: 100%;
+  }
+  & > section {
+    &:first-of-type {
+      background: #ddd;
+      h1 {
+        padding: rem(10px);
+      }
+    }
   }
 
   section {
