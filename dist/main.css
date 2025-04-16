@@ -100,11 +100,13 @@ blockquote:before,
 q:after,
 q:before {content: ""; content: none;}
 table {border-collapse: collapse; border-spacing: 0;}
-* {font-family: Pretendard, sans-serif !important; box-sizing: border-box; color: #222; -webkit-tap-highlight-color: transparent;}
+@font-face {font-family: S-CoreDream; src: url(https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff) format("woff"); font-weight: 400;}
+@font-face {font-family: S-CoreDream; src: url(https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff) format("woff"); font-weight: 500;}
+* {font-family: S-CoreDream, sans-serif; box-sizing: border-box; color: #222; -webkit-tap-highlight-color: transparent;}
 img {width: 100%; max-width: 100%;}
-h1 {font-size: 1.5rem; font-weight: 700; line-height: 1.2; text-align: center;}
-h2 {font-size: 1.25rem; font-weight: 600; line-height: 1.2; text-align: center;}
-h3 {font-size: 1rem; font-weight: 600; line-height: 1.2; text-align: center;}
+h1 {font-size: 1.5rem; font-weight: 500; line-height: 1.2; text-align: center;}
+h2 {font-size: 1.25rem; font-weight: 500; line-height: 1.2; text-align: center;}
+h3 {font-size: 1rem; font-weight: 500; line-height: 1.2; text-align: center;}
 p {font-size: 0.75rem; line-height: 1.2;}
 button {font-size: 0.75rem; border: none; background: #eee; border-radius: 6.25rem; padding: 0.3125rem 0.625rem; cursor: pointer;}
 button.active {background: #111; color: #fff;}
@@ -145,7 +147,7 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_header h2 strong {position: relative;}
 #wrapper .quadrants_header h2 strong:nth-of-type(2) {font-weight: 700;}
 #wrapper .quadrants_header button {cursor: default; transition: opacity 0.8s ease-in-out; opacity: 0; background: #333; border-radius: 3px; width: 2.25rem; height: 2.25rem; display: flex; justify-content: center; align-items: center;}
-#wrapper .quadrants_header button span {top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
+#wrapper .quadrants_header button span {font-family: Pretendard, sans-serif; top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
 #wrapper .quadrants_header.scale_up button {cursor: pointer; opacity: 1;}
 #wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; flex: 0 1 0;}
 #wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
@@ -159,7 +161,7 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_body .guide_box.top_left {top: 0; left: 0;}
 #wrapper .quadrants_body .guide_box.bottom_right {bottom: 0; right: 0;}
 #wrapper .quadrants_body .guide_box.bottom_left {bottom: 0; left: 0; transform: rotateZ(90deg);}
-#wrapper .quadrants_body .guide_box span {line-height: 1; position: relative; opacity: 0.4; top: 1px;}
+#wrapper .quadrants_body .guide_box span {font-family: Pretendard, sans-serif; line-height: 1; position: relative; opacity: 0.4; top: 1px;}
 #wrapper .quadrants_body[data-selected="quadrant_1"] .bottom,
 #wrapper .quadrants_body[data-selected="quadrant_1"] .bottom_right,
 #wrapper .quadrants_body[data-selected="quadrant_1"] .right,
@@ -176,7 +178,7 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_body .coffee_draft::before {content: ""; position: absolute; width: 1px; height: 75%; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ddd; z-index: 0;}
 #wrapper .quadrants_body .coffee_draft::after {content: ""; position: absolute; width: 65%; height: 1px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ddd; z-index: 0;}
 #wrapper .quadrants_body .coffee_draft p {position: relative; z-index: 5; color: #999; background: #eee; padding: 0.5rem 1rem;}
-#wrapper .quadrants_body .coffee_draft > span {transition: font-size 0.3s; position: absolute; font-size: 0.5rem; color: #444; z-index: 4;}
+#wrapper .quadrants_body .coffee_draft > span {transition: font-size 0.3s; position: absolute; font-size: 0.5rem; color: #444; font-weight: 500; z-index: 4;}
 #wrapper .quadrants_body .coffee_draft > span.top {top: 0.9375rem; transform: translateX(-50%); left: 50%;}
 #wrapper .quadrants_body .coffee_draft > span.bottom {bottom: 0.9375rem; transform: translateX(-50%); left: 50%;}
 #wrapper .quadrants_body .coffee_draft > span.right {top: 50%; transform: translateY(-50%); right: 0.9375rem;}

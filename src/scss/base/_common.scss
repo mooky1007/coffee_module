@@ -1,8 +1,20 @@
 @use "../abstracts/functions" as *;
 @use "../abstracts/mixins" as *;
 
+@font-face {
+  font-family: "S-CoreDream";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "S-CoreDream";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+  font-weight: 500;
+}
+
 * {
-  font-family: "Pretendard", sans-serif !important;
+  font-family: "S-CoreDream", sans-serif;
   box-sizing: border-box;
   color: #222;
   -webkit-tap-highlight-color: transparent;
@@ -15,21 +27,21 @@ img {
 
 h1 {
   font-size: rem(24px);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }
 
 h2 {
   font-size: rem(20px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }
 
 h3 {
   font-size: rem(16px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }

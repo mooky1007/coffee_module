@@ -67,6 +67,7 @@
       }
 
       span {
+        font-family: "Pretendard", sans-serif;
         line-height: 1;
         position: relative;
         opacity: 0.4;
@@ -155,6 +156,7 @@
         position: absolute;
         font-size: rem(8px);
         color: #444;
+        font-weight: 500;
         z-index: 4;
 
         &.top {

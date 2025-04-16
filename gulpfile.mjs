@@ -40,7 +40,10 @@ export const js = () => {
 };
 
 export const html = () => {
-    return src(`src/index.html`).pipe(reload({ stream: true }));
+    return src(`src/index.html`)
+        .pipe(replace('../', './'))
+        .pipe(dest('./'))
+        .pipe(reload({ stream: true }));
 };
 export const scss = () => {
     return src(`src/scss/main.scss`)
