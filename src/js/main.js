@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
     MachineWrap.replace(MachineSelector);
     TitleWrap.replace([QuadrantsTitle, QuadrantsFilter]);
     FilterWrap.replace(Filter);
-    QuadrantsWrap.replace(QuadrantsArea);
+    QuadrantsWrap.append(QuadrantsArea);
 
     QuadrantsArea.append(QuadrantsItemContainer);
 
@@ -51,7 +51,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }, [filterFold]);
 
     QuadrantsWrap.reset = () => {};
+
     QuadrantsWrap.update = () => {
+        QuadrantsWrap.dataset({
+            selected: selectedQuadrant(),
+        });
         QuadrantsTitle.update();
         QuadrantsArea.update();
     };

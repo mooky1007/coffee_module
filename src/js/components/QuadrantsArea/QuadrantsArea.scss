@@ -9,6 +9,103 @@
     margin: 0;
     margin-bottom: 10px;
 
+    .guide_box {
+      position: absolute;
+      width: rem(32px);
+      height: rem(32px);
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: 0.3s ease-in-out;
+
+      background: rgba(0, 0, 0, 0.05);
+
+      &.top {
+        top: 0;
+        left: 50%;
+        width: 50%;
+        transform: translateX(-50%);
+      }
+      &.right {
+        top: 50%;
+        right: 0;
+        height: 50%;
+        transform: translateY(-50%);
+      }
+      &.bottom {
+        bottom: 0;
+        left: 50%;
+        width: 50%;
+        transform: translateX(-50%);
+      }
+      &.left {
+        top: 50%;
+        left: 0;
+        height: 50%;
+        transform: translateY(-50%);
+      }
+      &.top_right {
+        top: 0;
+        right: 0;
+        transform: rotateZ(90deg);
+      }
+      &.top_left {
+        top: 0;
+        left: 0;
+      }
+      &.bottom_right {
+        bottom: 0;
+        right: 0;
+      }
+      &.bottom_left {
+        bottom: 0;
+        left: 0;
+        transform: rotateZ(90deg);
+      }
+
+      span {
+        line-height: 1;
+        position: relative;
+        opacity: 0.4;
+        top: 1px;
+      }
+    }
+
+    &[data-selected="quadrant_1"] {
+      .right,
+      .bottom,
+      .bottom_right {
+        opacity: 1;
+      }
+    }
+
+    &[data-selected="quadrant_2"] {
+      .left,
+      .bottom,
+      .bottom_left {
+        opacity: 1;
+      }
+    }
+
+    &[data-selected="quadrant_3"] {
+      .top,
+      .left,
+      .top_left {
+        opacity: 1;
+      }
+    }
+
+    &[data-selected="quadrant_4"] {
+      .top,
+      .right,
+      .top_right {
+        opacity: 1;
+      }
+    }
+
     .coffee_draft {
       width: 100%;
       aspect-ratio: 1/1;

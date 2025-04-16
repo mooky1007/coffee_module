@@ -148,6 +148,28 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; flex: 0 1 0;}
 #wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
 #wrapper .quadrants_body {position: relative; overflow: hidden; padding: 0; margin: 0 0 10px;}
+#wrapper .quadrants_body .guide_box {position: absolute; width: 2rem; height: 2rem; z-index: 3; display: flex; justify-content: center; align-items: center; pointer-events: none; opacity: 0; transition: 0.3s ease-in-out; background: rgba(0, 0, 0, 0.05);}
+#wrapper .quadrants_body .guide_box.top {top: 0; left: 50%; width: 50%; transform: translateX(-50%);}
+#wrapper .quadrants_body .guide_box.right {top: 50%; right: 0; height: 50%; transform: translateY(-50%);}
+#wrapper .quadrants_body .guide_box.bottom {bottom: 0; left: 50%; width: 50%; transform: translateX(-50%);}
+#wrapper .quadrants_body .guide_box.left {top: 50%; left: 0; height: 50%; transform: translateY(-50%);}
+#wrapper .quadrants_body .guide_box.top_right {top: 0; right: 0; transform: rotateZ(90deg);}
+#wrapper .quadrants_body .guide_box.top_left {top: 0; left: 0;}
+#wrapper .quadrants_body .guide_box.bottom_right {bottom: 0; right: 0;}
+#wrapper .quadrants_body .guide_box.bottom_left {bottom: 0; left: 0; transform: rotateZ(90deg);}
+#wrapper .quadrants_body .guide_box span {line-height: 1; position: relative; opacity: 0.4; top: 1px;}
+#wrapper .quadrants_body[data-selected="quadrant_1"] .bottom,
+#wrapper .quadrants_body[data-selected="quadrant_1"] .bottom_right,
+#wrapper .quadrants_body[data-selected="quadrant_1"] .right,
+#wrapper .quadrants_body[data-selected="quadrant_2"] .bottom,
+#wrapper .quadrants_body[data-selected="quadrant_2"] .bottom_left,
+#wrapper .quadrants_body[data-selected="quadrant_2"] .left,
+#wrapper .quadrants_body[data-selected="quadrant_3"] .left,
+#wrapper .quadrants_body[data-selected="quadrant_3"] .top,
+#wrapper .quadrants_body[data-selected="quadrant_3"] .top_left,
+#wrapper .quadrants_body[data-selected="quadrant_4"] .right,
+#wrapper .quadrants_body[data-selected="quadrant_4"] .top,
+#wrapper .quadrants_body[data-selected="quadrant_4"] .top_right {opacity: 1;}
 #wrapper .quadrants_body .coffee_draft {width: 100%; aspect-ratio: 1/1; background: #eee; padding: 0; display: flex; justify-content: center; align-items: center; position: relative;}
 #wrapper .quadrants_body .coffee_draft::before {content: ""; position: absolute; width: 1px; height: 75%; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ddd; z-index: 0;}
 #wrapper .quadrants_body .coffee_draft::after {content: ""; position: absolute; width: 65%; height: 1px; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ddd; z-index: 0;}

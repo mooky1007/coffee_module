@@ -619,7 +619,7 @@
     MachineWrap.replace(MachineSelector_default);
     TitleWrap.replace([QuadrantsTitle_default, QuadrantsFilter_default]);
     FilterWrap.replace(Filter_default);
-    QuadrantsWrap.replace(QuadrantsArea_default);
+    QuadrantsWrap.append(QuadrantsArea_default);
     QuadrantsArea_default.append(QuadrantsItemContainer);
     t.effect(() => {
       if (filterFold()) FilterWrap.class("fold");
@@ -628,6 +628,9 @@
     QuadrantsWrap.reset = () => {
     };
     QuadrantsWrap.update = () => {
+      QuadrantsWrap.dataset({
+        selected: selectedQuadrant()
+      });
       QuadrantsTitle_default.update();
       QuadrantsArea_default.update();
     };
