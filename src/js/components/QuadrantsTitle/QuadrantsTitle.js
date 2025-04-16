@@ -4,16 +4,38 @@ import { areaInfor, selectedQuadrant, setSelectedQuadrant } from '../../lib/_sta
 const Title = Dom.h2;
 const QuadrantsTitle = Dom.ul.set({
     children: [
-        Title.set({ text: areaInfor[selectedQuadrant()].text }),
+        Title.set({
+            html: areaInfor[selectedQuadrant()].text,
+        }),
         Dom.button.set({
             children: [Dom.span.set('⏎')],
             on: {
-                click: () => setSelectedQuadrant('all'),
+                click: () => {
+                    if (selectedQuadrant() !== 'all') setSelectedQuadrant('all');
+                },
             },
         }),
     ],
-    update: () => {
-        Title.text(areaInfor[selectedQuadrant()].text);
+    update: async () => {
+        Title.set({
+            html: areaInfor[selectedQuadrant()].text,
+        });
+        Title.animations({
+            keyframe: [
+                {
+                    opacity: 0,
+                    transform: 'translateY(10px)',
+                },
+                {
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                },
+            ],
+            options: {
+                duration: 600,
+                fill: 'both',
+            },
+        });
     },
 });
 

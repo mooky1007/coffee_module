@@ -102,8 +102,8 @@ q:before {content: ""; content: none;}
 table {border-collapse: collapse; border-spacing: 0;}
 * {font-family: Pretendard, sans-serif !important; box-sizing: border-box; color: #222; -webkit-tap-highlight-color: transparent;}
 img {width: 100%; max-width: 100%;}
-h1 {font-size: 1.75rem; font-weight: 700; line-height: 1.2; text-align: center;}
-h2 {font-size: 1.5rem; font-weight: 600; line-height: 1.2; text-align: center;}
+h1 {font-size: 1.5rem; font-weight: 700; line-height: 1.2; text-align: center;}
+h2 {font-size: 1.25rem; font-weight: 600; line-height: 1.2; text-align: center;}
 h3 {font-size: 1rem; font-weight: 600; line-height: 1.2; text-align: center;}
 p {font-size: 0.75rem; line-height: 1.2;}
 button {font-size: 0.75rem; border: none; background: #eee; border-radius: 6.25rem; padding: 0.3125rem 0.625rem; cursor: pointer;}
@@ -119,17 +119,17 @@ button.active {background: #111; color: #fff;}
 #wrapper section h3 + ul {margin-top: 0.625rem; padding: 0.625rem 0;}
 #wrapper section + section {margin-top: 0.625rem;}
 #wrapper section ul {display: flex; justify-content: space-between; align-items: center; gap: 0.3125rem;}
-#wrapper .product_list {border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem;}
+#wrapper .product_list {margin-top: 0; border-top: 6px solid #eee; padding-top: 1.875rem;}
 #wrapper .product_list h2 {text-align: left;}
 #wrapper .product_list ul {display: flex; width: 100%; flex-direction: column; justify-content: flex-start; gap: 0.625rem;}
 #wrapper .product_list ul li {display: flex; width: 100%; margin: 0 auto; justify-content: flex-start; align-items: flex-start; border-radius: 0.3125rem; border: 1px solid #ddd; padding: 1.25rem; gap: 1.25rem;}
 #wrapper .product_list ul li .thumb_box {background: #eee; width: 5rem; height: 5rem; position: relative; overflow: hidden;}
-#wrapper .product_list ul li .thumb_box::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 2.4s infinite wave;}
+#wrapper .product_list ul li .thumb_box::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 1.2s infinite wave;}
 #wrapper .product_list ul li .infor_box {display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 0.3125rem;}
 #wrapper .product_list ul li .infor_box .title_area {width: 7.5rem; height: 1.25rem; background: #eee; margin-bottom: 0.3125rem; position: relative; overflow: hidden;}
-#wrapper .product_list ul li .infor_box .title_area::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 2.4s 0.6s infinite wave;}
+#wrapper .product_list ul li .infor_box .title_area::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 1.2s 0.3s infinite wave;}
 #wrapper .product_list ul li .infor_box .desc_area {width: 11.25rem; height: 0.875rem; background: #eee; position: relative; overflow: hidden;}
-#wrapper .product_list ul li .infor_box .desc_area::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 2.4s 0.6s infinite wave;}
+#wrapper .product_list ul li .infor_box .desc_area::after {content: ""; position: absolute; top: 0; left: -100%; height: 100%; width: 100%; background: linear-gradient( 90deg, transparent, rgba(255, 255, 255, 0.6), transparent ); animation: 1.2s 0.3s infinite wave;}
 #wrapper .product_list ul li .infor_box .desc_area:nth-of-type(3) {width: 10rem;}
 @keyframes wave {0% { transform: translateX(-100%);}
   100% {transform: translateX(200%);}
@@ -137,13 +137,14 @@ button.active {background: #111; color: #fff;}
 #wrapper .select_machine {aspect-ratio: 1/0.75; display: flex; justify-content: center; align-items: center; flex-direction: column;}
 #wrapper .select_machine ul {justify-content: flex-start; gap: 0.625rem;}
 #wrapper .select_machine ul button {padding: 0.625rem 1.25rem; font-size: 1rem;}
-#wrapper .quadrants_header {border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 2.5rem;}
-#wrapper .quadrants_header ul {position: relative;}
-#wrapper .quadrants_header h2 {padding-top: 0.625rem; margin-bottom: 0.625rem;}
-#wrapper .quadrants_header button {display: none;}
-#wrapper .quadrants_header.scale_up button {background: #333; border-radius: 3px; width: 2.625rem; height: 2.625rem; display: flex; justify-content: center; align-items: center;}
-#wrapper .quadrants_header.scale_up button span {top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
-#wrapper .quadrants_header ul.selected_filter {position: absolute; height: 1.25rem; justify-content: flex-start !important; margin-bottom: 1.25rem;}
+#wrapper .quadrants_header {border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 1.25rem;}
+#wrapper .quadrants_header ul {position: relative; align-items: flex-end;}
+#wrapper .quadrants_header h2 {padding-top: 0.625rem; text-align: left; height: 3.625rem;}
+#wrapper .quadrants_header h2 strong:nth-of-type(2) {font-weight: 700;}
+#wrapper .quadrants_header button {transition: opacity 0.8s ease-in-out; opacity: 0; background: #333; border-radius: 3px; width: 2.25rem; height: 2.25rem; display: flex; justify-content: center; align-items: center;}
+#wrapper .quadrants_header button span {top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
+#wrapper .quadrants_header.scale_up button {opacity: 1;}
+#wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; margin-top: 0.625rem;}
 #wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
 #wrapper .quadrants_body {position: relative; overflow: hidden; padding: 0; margin: 0 0 10px;}
 #wrapper .quadrants_body .coffee_draft {width: 100%; aspect-ratio: 1/1; background: #eee; padding: 0; display: flex; justify-content: center; align-items: center; position: relative;}
@@ -165,18 +166,18 @@ button.active {background: #111; color: #fff;}
 @media (hover: hover) and (pointer: fine) {#wrapper .quadrants_body .coffee_draft:not(.scale_up) .clickable_section > div:hover { background: #ddd;}
 }
 #wrapper .quadrants_body .coffee_draft .quadrants_item {position: absolute; display: flex; flex-direction: column; justify-content: center; align-items: center; transform: translate(-50%, -50%); gap: 0.125rem;}
-#wrapper .quadrants_body .coffee_draft .quadrants_item > div {width: 1.5rem; height: 1.5rem; background: #333; border-radius: 2px;}
+#wrapper .quadrants_body .coffee_draft .quadrants_item > div {width: 1.25rem; height: 1.25rem; background: #999; border-radius: 2px;}
 #wrapper .quadrants_body .coffee_draft .quadrants_item > span {position: absolute; white-space: nowrap; font-size: 0.4375rem; bottom: -0.1875rem; left: 50%; transform: translate(-50%, 100%);}
 #wrapper .quadrants_body .coffee_draft:not(.scale_up) .quadrants_item > span {display: none;}
 #wrapper .filter_container.fold span.arrow {position: absolute; top: calc(50% - 0.1875rem); left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 0.75rem; height: 0.75rem; border-bottom: 0.125rem solid #222; border-right: 0.125rem solid #222;}
-#wrapper .filter_container.fold .filter_section {max-height: 0;}
+#wrapper .filter_container.fold .filter_section {max-height: 0; padding-bottom: 0;}
 #wrapper .filter_container span.arrow {transition: 0.4s ease-in-out; position: absolute; top: calc(50% - -0.1875rem); left: 50%; transform: translate(-50%, -50%) rotate(225deg); width: 0.75rem; height: 0.75rem; border-bottom: 0.125rem solid #222; border-right: 0.125rem solid #222;}
 #wrapper .filter_container .filter_header {display: flex; cursor: pointer; align-items: center; justify-content: space-between; padding: 0.625rem 0; margin-bottom: 0.625rem;}
 #wrapper .filter_container .filter_header h3 {text-align: left;}
 #wrapper .filter_container .filter_header div {position: relative; width: 2rem; height: 2rem;}
-#wrapper .filter_container .filter_section {transition: 0.4s ease-in-out; max-height: 300px; overflow: hidden;}
+#wrapper .filter_container .filter_section {transition: 0.4s ease-in-out; max-height: 300px; padding-bottom: 1.25rem; overflow: hidden;}
 #wrapper .filter_container ul.filter_section {width: 100%; display: grid; grid-template-columns: 1fr;}
-#wrapper .filter_container ul.filter_section li {width: 100%; border: 2px solid #e1e1e1; border-radius: 3px;}
+#wrapper .filter_container ul.filter_section li {width: 100%; border: 1px solid #e1e1e1; border-radius: 3px;}
 #wrapper .filter_container ul.filter_section li label {display: flex; cursor: pointer; justify-content: flex-start; align-items: center; padding: 0.9375rem 0.625rem;}
 #wrapper .filter_container ul.filter_section li label span {position: relative; width: 16px; height: 16px; border-radius: 20px; border: 1px solid #ddd; margin-right: 0.625rem;}
 #wrapper .filter_container ul.filter_section li label p {line-height: 16px;}

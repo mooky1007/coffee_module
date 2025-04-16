@@ -36,8 +36,8 @@
   }
 
   .product_list {
+    margin-top: 0;
     border-top: 6px solid #eee;
-    margin-top: rem(30px);
     padding-top: rem(30px);
 
     h2 {
@@ -59,7 +59,7 @@
         align-items: flex-start;
         border-radius: rem(5px);
         border: 1px solid #ddd;
-        padding: rem(20px);
+        padding: rem(20px) rem(20px);
         gap: rem(20px);
 
         .thumb_box {
@@ -76,7 +76,7 @@
             height: 100%;
             width: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            animation: wave 2.4s infinite;
+            animation: wave 1.2s infinite;
           }
         }
         .infor_box {
@@ -101,8 +101,8 @@
               height: 100%;
               width: 100%;
               background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-              animation: wave 2.4s infinite;
-              animation-delay: 0.6s;
+              animation: wave 1.2s infinite;
+              animation-delay: 0.3s;
             }
           }
           .desc_area {
@@ -119,8 +119,8 @@
               height: 100%;
               width: 100%;
               background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-              animation: wave 2.4s infinite;
-              animation-delay: 0.6s;
+              animation: wave 1.2s infinite;
+              animation-delay: 0.3s;
             }
 
             &:nth-of-type(3) {

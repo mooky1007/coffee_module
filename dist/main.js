@@ -273,43 +273,43 @@
     {
       key: "decaf",
       name: "\uB514\uCE74\uD398\uC778",
-      color: "#94473Cco"
+      color: "#94473C99"
     },
     {
       key: "ice",
       name: "\uC544\uC774\uC2A4",
-      color: "#4BADD1co"
+      color: "#4BADD199"
     },
     {
       key: "milk",
       name: "\uBC00\uD06C",
-      color: "#D3AB89co"
+      color: "#D3AB8999"
     },
     {
       key: "starbucks",
       name: "\uC2A4\uD0C0\uBC85\uC2A4",
-      color: "#0D6243co"
+      color: "#0D624399"
     }
   ];
   var areaInfor = {
     all: {
-      text: "\uCDE8\uD5A5\uC5D0 \uB9DE\uB294 \uC601\uC5ED\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694.",
+      text: "\uB2F9\uC2E0\uC758 \uCDE8\uD5A5\uC5D0 \uB9DE\uB294 <br>\uC601\uC5ED\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694.",
       style: { transition: "0.5s", transform: "scale(1) translate(0,0)" }
     },
     quadrant_1: {
-      text: "\uBD80\uB4DC\uB7FD\uACE0 \uC0B0\uB73B\uD55C \uCEE4\uD53C",
+      text: `\uB2F9\uC2E0\uC740 <strong style="color:#e68658aa;">\uBD80\uB4DC\uB7FD\uACE0 \uACE0\uC18C\uD55C</strong> \uCEE4\uD53C\uB97C <br>\uC88B\uC544\uD558\uB294 <strong style="color:#e68658;">"\uC74C\uC720\uC2DC\uC778"</strong>\uC785\uB2C8\uB2E4.`,
       style: { transition: "0.5s", transform: "scale(1.8) translate(22%, 22%)" }
     },
     quadrant_2: {
-      text: "\uBD80\uB4DC\uB7FD\uACE0 \uACE0\uC18C\uD55C \uCEE4\uD53C",
+      text: `\uB2F9\uC2E0\uC740 <strong style="color:#68b3a7aa;">\uBD80\uB4DC\uB7FD\uACE0 \uC0B0\uB73B\uD55C</strong> \uCEE4\uD53C\uB97C <br>\uC88B\uC544\uD558\uB294 <strong style="color:#68b3a7;">"\uB85C\uB9E8\uD2F0\uC2A4\uD2B8"</strong>\uC785\uB2C8\uB2E4.`,
       style: { transition: "0.5s", transform: "scale(1.8) translate(-22%, 22%)" }
     },
     quadrant_3: {
-      text: "\uAC15\uB82C\uD558\uACE0 \uACE0\uC18C\uD55C \uCEE4\uD53C",
+      text: `\uB2F9\uC2E0\uC740 <strong style="color:#687ba2aa;">\uAC15\uB82C\uD558\uACE0 \uC0B0\uB73B\uD55C</strong> \uCEE4\uD53C\uB97C <br>\uC88B\uC544\uD558\uB294 <strong style="color:#687ba2;">"\uC790\uC5F0\uC778"</strong>\uC785\uB2C8\uB2E4.`,
       style: { transition: "0.5s", transform: "scale(1.8) translate(-22%, -22%)" }
     },
     quadrant_4: {
-      text: "\uAC15\uB82C\uD558\uACE0 \uC0B0\uB73B\uD55C \uCEE4\uD53C",
+      text: `\uB2F9\uC2E0\uC740 <strong style="color:#a26868aa;">\uAC15\uB82C\uD558\uACE0 \uACE0\uC18C\uD55C</strong> \uCEE4\uD53C\uB97C <br>\uC88B\uC544\uD558\uB294 <strong style="color:#a26868;">"\uBAA8\uD5D8\uAC00"</strong>\uC785\uB2C8\uB2E4.`,
       style: { transition: "0.5s", transform: "scale(1.8) translate(22%, -22%)" }
     }
   };
@@ -421,16 +421,38 @@
   var Title = t.h2;
   var QuadrantsTitle = t.ul.set({
     children: [
-      Title.set({ text: areaInfor[selectedQuadrant()].text }),
+      Title.set({
+        html: areaInfor[selectedQuadrant()].text
+      }),
       t.button.set({
         children: [t.span.set("\u23CE")],
         on: {
-          click: () => setSelectedQuadrant("all")
+          click: () => {
+            if (selectedQuadrant() !== "all") setSelectedQuadrant("all");
+          }
         }
       })
     ],
-    update: () => {
-      Title.text(areaInfor[selectedQuadrant()].text);
+    update: async () => {
+      Title.set({
+        html: areaInfor[selectedQuadrant()].text
+      });
+      Title.animations({
+        keyframe: [
+          {
+            opacity: 0,
+            transform: "translateY(10px)"
+          },
+          {
+            opacity: 1,
+            transform: "translateY(0)"
+          }
+        ],
+        options: {
+          duration: 600,
+          fill: "both"
+        }
+      });
     }
   });
   var QuadrantsTitle_default = QuadrantsTitle;
@@ -463,7 +485,9 @@
       class: `num0${idx}`,
       on: {
         click: () => {
-          setSelectedQuadrant(`quadrant_${idx}`);
+          if (selectedQuadrant() !== `quadrant_${idx}`) {
+            setSelectedQuadrant(`quadrant_${idx}`);
+          }
         }
       }
     });
@@ -498,8 +522,7 @@
           return t.li.set({
             text: `#${el.name}`,
             style: {
-              // background: el.color,
-              // background: '#000',
+              background: el.color
             }
           });
         })
@@ -591,14 +614,14 @@
     t.effect(() => {
       setQuadrantsMode(selectedQuadrant());
       QuadrantsWrap.update();
-      if (selectedQuadrant() !== "all") scrollTo(TitleWrap);
+      scrollTo(TitleWrap);
     }, [selectedQuadrant]);
     let firstInit = true;
     t.effect(async () => {
       MachineSelector_default.forEach((button) => button.update());
       Filter_default.reset();
       await t.delay(200);
-      setSelectedQuadrant("all");
+      if (selectedQuadrant() !== "all") setSelectedQuadrant("all");
       if (!firstInit) scrollTo(TitleWrap);
       else firstInit = false;
     }, [machine]);

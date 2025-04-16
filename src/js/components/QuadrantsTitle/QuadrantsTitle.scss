@@ -3,30 +3,38 @@
 @mixin QuadrantsTitle {
   ul {
     position: relative;
+    align-items: flex-end;
   }
   h2 {
     padding-top: rem(10px);
-    margin-bottom: rem(10px);
+    text-align: left;
+    height: rem(58px);;
+
+    strong:nth-of-type(2) {
+      font-weight: 700;
+    }
   }
   button {
-    display: none;
+    transition: opacity 0.8s ease-in-out;
+    opacity: 0;
+    background: #333;
+    border-radius: 3px;
+    width: rem(36px);
+    height: rem(36px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      top: rem(1px);
+      font-size: rem(18px);
+      color: #fff;
+      position: relative;
+    }
   }
 
   &.scale_up {
     button {
-      background: #333;
-      border-radius: 3px;
-      width: rem(42px);
-      height: rem(42px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      span {
-        top: rem(1px);
-        font-size: rem(18px);
-        color: #fff;
-        position: relative;
-      }
+      opacity: 1;
     }
   }
 }

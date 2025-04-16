@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setQuadrantsMode(selectedQuadrant());
 
         QuadrantsWrap.update();
-        if (selectedQuadrant() !== 'all') scrollTo(TitleWrap);
+        scrollTo(TitleWrap);
     }, [selectedQuadrant]);
 
     let firstInit = true;
@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
         Filter.reset();
 
         await Dom.delay(200);
-        setSelectedQuadrant('all');
+        if (selectedQuadrant() !== 'all') setSelectedQuadrant('all');
         if (!firstInit) scrollTo(TitleWrap);
         else firstInit = false;
     }, [machine]);

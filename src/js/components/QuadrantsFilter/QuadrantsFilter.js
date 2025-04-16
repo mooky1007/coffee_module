@@ -9,8 +9,7 @@ export const QuadrantsFilter = Dom.ul.set({
                 return Dom.li.set({
                     text: `#${el.name}`,
                     style: {
-                        // background: el.color,
-                        // background: '#000',
+                        background: el.color,
                     },
                 });
             })

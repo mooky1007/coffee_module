@@ -6,7 +6,9 @@ const QuadrantsAreaItem = (idx) => {
         class: `num0${idx}`,
         on: {
             click: () => {
-                setSelectedQuadrant(`quadrant_${idx}`);
+                if (selectedQuadrant() !== `quadrant_${idx}`) {
+                    setSelectedQuadrant(`quadrant_${idx}`);
+                }
             },
         },
     });

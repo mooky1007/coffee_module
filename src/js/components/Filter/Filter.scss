@@ -17,6 +17,7 @@
 
       .filter_section {
         max-height: 0;
+        padding-bottom: 0;
       }
     }
 
@@ -53,6 +54,7 @@
     .filter_section {
       transition: 0.4s ease-in-out;
       max-height: 300px;
+      padding-bottom: rem(20px);
       overflow: hidden;
     }
     ul.filter_section {
@@ -62,7 +64,7 @@
 
       li {
         width: 100%;
-        border: 2px solid #e1e1e1;
+        border: 1px solid #e1e1e1;
         border-radius: 3px;
 
         label {
