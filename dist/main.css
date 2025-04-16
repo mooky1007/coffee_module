@@ -100,7 +100,7 @@ blockquote:before,
 q:after,
 q:before {content: ""; content: none;}
 table {border-collapse: collapse; border-spacing: 0;}
-* {font-family: Pretendard, sans-serif !important; box-sizing: border-box; color: #222;}
+* {font-family: Pretendard, sans-serif !important; box-sizing: border-box; color: #222; -webkit-tap-highlight-color: transparent;}
 img {width: 100%; max-width: 100%;}
 h1 {font-size: 1.75rem; font-weight: 700; line-height: 1.2; text-align: center;}
 h2 {font-size: 1.5rem; font-weight: 600; line-height: 1.2; text-align: center;}
