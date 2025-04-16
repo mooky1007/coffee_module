@@ -13,8 +13,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
       background: #333;
+
+      span {
+        position: relative;
+        top: 1px;
+        color: #fff;
+        line-height: 1;
+      }
     }
   }
 }

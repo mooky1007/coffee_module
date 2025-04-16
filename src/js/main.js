@@ -75,6 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
     Dom.effect(() => {
         QuadrantsFilter.update();
         QuadrantsItemContainer.update();
+        scrollTo(FilterWrap, 'bottom');
     }, [filter]);
 
     Dom.effect(() => {

@@ -10,10 +10,10 @@ filterData.forEach((el) => {
         fill: 'forwards',
     }),
         filterDom[el.name].set({
-            text: `#${el.name}`,
             style: {
                 background: el.color,
             },
+            children: [Dom.span.set(`#${el.name}`)],
         });
 });
 

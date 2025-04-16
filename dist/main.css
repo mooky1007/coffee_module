@@ -150,7 +150,8 @@ button.active {background: #111; color: #fff;}
 #wrapper .quadrants_header button span {font-family: Pretendard, sans-serif; top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
 #wrapper .quadrants_header.scale_up button {cursor: pointer; opacity: 1;}
 #wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; flex: 0 1 0;}
-#wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
+#wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; background: #333;}
+#wrapper .quadrants_header ul.selected_filter li span {position: relative; top: 1px; color: #fff; line-height: 1;}
 #wrapper .quadrants_body {position: relative; overflow: hidden; padding: 0; margin: 0 0 10px;}
 #wrapper .quadrants_body .guide_box {position: absolute; width: 2rem; height: 2rem; z-index: 3; display: flex; justify-content: center; align-items: center; pointer-events: none; opacity: 0; transition: 0.3s ease-in-out; background: rgba(0, 0, 0, 0.05);}
 #wrapper .quadrants_body .guide_box.top {top: 0; left: 50%; width: 50%; transform: translateX(-50%);}

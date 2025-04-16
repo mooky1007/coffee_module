@@ -542,10 +542,10 @@
       duration: 300,
       fill: "forwards"
     }), filterDom[el.name].set({
-      text: `#${el.name}`,
       style: {
         background: el.color
-      }
+      },
+      children: [t.span.set(`#${el.name}`)]
     });
   });
   var prevFilter = [];
@@ -582,9 +582,9 @@
   var QuadrantsItem_default = QuadrantsItem;
 
   // src/js/lib/_utils.js
-  var scrollTo = (target) => {
+  var scrollTo = (target, position = "top") => {
     window.scrollTo({
-      top: target.el.getBoundingClientRect().top + window.pageYOffset,
+      top: target.el.getBoundingClientRect()[position] + window.pageYOffset - (position === "bottom" ? window.innerHeight : 0),
       behavior: "smooth"
     });
   };
@@ -648,6 +648,7 @@
     t.effect(() => {
       QuadrantsFilter_default.update();
       QuadrantsItemContainer.update();
+      scrollTo(FilterWrap, "bottom");
     }, [filter]);
     t.effect(() => {
       setQuadrantsMode(selectedQuadrant());
