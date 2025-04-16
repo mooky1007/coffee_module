@@ -137,14 +137,15 @@ button.active {background: #111; color: #fff;}
 #wrapper .select_machine {aspect-ratio: 1/0.75; display: flex; justify-content: center; align-items: center; flex-direction: column;}
 #wrapper .select_machine ul {justify-content: flex-start; gap: 0.625rem;}
 #wrapper .select_machine ul button {padding: 0.625rem 1.25rem; font-size: 1rem;}
-#wrapper .quadrants_header {border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 1.25rem;}
-#wrapper .quadrants_header ul {position: relative; align-items: flex-end;}
-#wrapper .quadrants_header h2 {padding-top: 0.625rem; text-align: left; height: 3.625rem;}
+#wrapper .quadrants_header {display: flex; flex-direction: column; gap: 10px; height: 9.0625rem; border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem; padding-bottom: 1.25rem;}
+#wrapper .quadrants_header ul {position: relative; width: 100%; align-items: center; flex: 1 0 auto;}
+#wrapper .quadrants_header h2 {text-align: left; flex: 1 0 0;}
+#wrapper .quadrants_header h2 strong {position: relative;}
 #wrapper .quadrants_header h2 strong:nth-of-type(2) {font-weight: 700;}
 #wrapper .quadrants_header button {transition: opacity 0.8s ease-in-out; opacity: 0; background: #333; border-radius: 3px; width: 2.25rem; height: 2.25rem; display: flex; justify-content: center; align-items: center;}
 #wrapper .quadrants_header button span {top: 0.0625rem; font-size: 1.125rem; color: #fff; position: relative;}
 #wrapper .quadrants_header.scale_up button {opacity: 1;}
-#wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; margin-top: 0.625rem;}
+#wrapper .quadrants_header ul.selected_filter {justify-content: flex-start !important; height: 1.3125rem; flex: 0 1 0;}
 #wrapper .quadrants_header ul.selected_filter li {font-size: 0.6875rem; border-radius: 1.25rem; padding: 0.3125rem 0.625rem; display: flex; justify-content: center; align-items: center; color: #fff; background: #333;}
 #wrapper .quadrants_body {position: relative; overflow: hidden; padding: 0; margin: 0 0 10px;}
 #wrapper .quadrants_body .coffee_draft {width: 100%; aspect-ratio: 1/1; background: #eee; padding: 0; display: flex; justify-content: center; align-items: center; position: relative;}

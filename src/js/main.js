@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setQuadrantsMode(selectedQuadrant());
 
         QuadrantsWrap.update();
-        scrollTo(TitleWrap);
+        if (selectedQuadrant() !== 'all') scrollTo(TitleWrap);
     }, [selectedQuadrant]);
 
     let firstInit = true;

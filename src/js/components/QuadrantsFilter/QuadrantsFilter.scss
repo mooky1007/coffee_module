@@ -4,7 +4,7 @@
   ul.selected_filter {
     justify-content: flex-start !important;
     height: rem(21px);
-    margin-top: rem(10px);
+    flex: 0 1 0;
 
     li {
       font-size: rem(11px);

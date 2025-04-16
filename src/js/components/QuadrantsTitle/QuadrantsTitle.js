@@ -2,6 +2,7 @@ import { Dom } from 'dom_craft';
 import { areaInfor, selectedQuadrant, setSelectedQuadrant } from '../../lib/_state';
 
 const Title = Dom.h2;
+
 const QuadrantsTitle = Dom.ul.set({
     children: [
         Title.set({
@@ -17,11 +18,8 @@ const QuadrantsTitle = Dom.ul.set({
         }),
     ],
     update: async () => {
-        Title.set({
-            html: areaInfor[selectedQuadrant()].text,
-        });
-        Title.animations({
-            keyframe: [
+        const animation = await Title.animate(
+            [
                 {
                     opacity: 0,
                     transform: 'translateY(10px)',
@@ -31,11 +29,16 @@ const QuadrantsTitle = Dom.ul.set({
                     transform: 'translateY(0)',
                 },
             ],
-            options: {
+            {
                 duration: 600,
-                fill: 'both',
-            },
+                fill: 'forwards',
+            }
+        );
+        animation.cancel();
+        Title.set({
+            html: areaInfor[selectedQuadrant()].text,
         });
+        animation.play();
     },
 });
 

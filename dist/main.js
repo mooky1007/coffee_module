@@ -28,9 +28,9 @@
     }
     static state(t2) {
       let e2 = t2;
-      const n = /* @__PURE__ */ new Set(), r = () => e2;
-      return r.sub = (t3) => n.add(t3), r.unsub = (t3) => n.delete(t3), [r, (t3) => {
-        e2 = t3, n.forEach((t4) => t4());
+      const r = /* @__PURE__ */ new Set(), n = () => e2;
+      return n.sub = (t3) => r.add(t3), n.unsub = (t3) => r.delete(t3), [n, (t3) => {
+        e2 = t3, r.forEach((t4) => t4());
       }];
     }
     static effect(t2, e2) {
@@ -219,23 +219,23 @@
     }
     animations(t2) {
       if (Array.isArray(t2)) t2.forEach((t3) => {
-        const { keyframe: e2, options: n } = t3;
-        this.animate(e2, n);
+        const { keyframe: e2, options: r } = t3;
+        this.animate(e2, r);
       });
       else {
-        const { keyframe: e2, options: n } = t2;
-        this.animate(e2, n);
+        const { keyframe: e2, options: r } = t2;
+        this.animate(e2, r);
       }
       return this;
     }
-    async animate(t2, e2) {
-      this.ani = this.el.animate(t2, e2), await this.ani.finished, this.onAnimationEnd && this.onAnimationEnd.call(this);
+    animate(t2, e2) {
+      return this.ani = this.el.animate(t2, e2), this.ani.pause(), this.ani;
     }
-    children(t2, n = true) {
+    children(t2, r = true) {
       return Array.isArray(t2) || (t2 = [t2]), t2.forEach(async (t3) => {
-        if (t3 instanceof _e && (n ? this.el.append(t3.el) : this.el.prepend(t3.el), t3.introAnimation)) {
-          const { keyframe: e2, options: n2 } = t3.introAnimation;
-          t3.el.animate(e2, n2);
+        if (t3 instanceof _e && (r ? this.el.append(t3.el) : this.el.prepend(t3.el), t3.introAnimation)) {
+          const { keyframe: e2, options: r2 } = t3.introAnimation;
+          t3.el.animate(e2, r2);
         }
       }), this;
     }
@@ -356,6 +356,7 @@
   // src/js/components/Filter/Filter.js
   var filterButton = (data) => {
     return t.li.set({
+      class: `filter_list_item_${data.color.replace("#", "")}`,
       children: [
         t.label.set({
           attr: {
@@ -387,6 +388,24 @@
       ]
     });
   };
+  t.injectCss(`
+  ${filterData.map((data) => {
+    return `
+          .filter_list_item_${data.color.replace("#", "")}:has(input:checked) {
+            border-color: ${data.color} !important;
+          }
+
+          .filter_list_item_${data.color.replace("#", "")}:has(input:checked) input:checked + span {
+            border-color: ${data.color} !important;
+          }
+
+          .filter_list_item_${data.color.replace("#", "")}:has(input:checked) input:checked + span::after {
+            background: ${data.color} !important;
+          }
+          `;
+  }).join(`
+`)}
+`);
   var [filterFold, setFilterFold] = t.state(false);
   var FilterHeader = t.div.set({
     class: "filter_header",
@@ -434,11 +453,8 @@
       })
     ],
     update: async () => {
-      Title.set({
-        html: areaInfor[selectedQuadrant()].text
-      });
-      Title.animations({
-        keyframe: [
+      const animation = await Title.animate(
+        [
           {
             opacity: 0,
             transform: "translateY(10px)"
@@ -448,11 +464,16 @@
             transform: "translateY(0)"
           }
         ],
-        options: {
+        {
           duration: 600,
-          fill: "both"
+          fill: "forwards"
         }
+      );
+      animation.cancel();
+      Title.set({
+        html: areaInfor[selectedQuadrant()].text
       });
+      animation.play();
     }
   });
   var QuadrantsTitle_default = QuadrantsTitle;
@@ -614,7 +635,7 @@
     t.effect(() => {
       setQuadrantsMode(selectedQuadrant());
       QuadrantsWrap.update();
-      scrollTo(TitleWrap);
+      if (selectedQuadrant() !== "all") scrollTo(TitleWrap);
     }, [selectedQuadrant]);
     let firstInit = true;
     t.effect(async () => {

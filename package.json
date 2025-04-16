@@ -31,6 +31,6 @@
         "sass": "^1.86.3"
     },
     "dependencies": {
-        "dom_craft": "^1.1.12"
+        "dom_craft": "^1.1.15"
     }
 }

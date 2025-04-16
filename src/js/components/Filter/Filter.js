@@ -3,6 +3,7 @@ import { filter, filterData, setFilter } from '../../lib/_state';
 
 const filterButton = (data) => {
     return Dom.li.set({
+        class: `filter_list_item_${data.color.replace('#', '')}`,
         children: [
             Dom.label.set({
                 attr: {
@@ -34,6 +35,26 @@ const filterButton = (data) => {
         ],
     });
 };
+
+Dom.injectCss(`
+  ${filterData
+      .map((data) => {
+          return `
+          .filter_list_item_${data.color.replace('#', '')}:has(input:checked) {
+            border-color: ${data.color} !important;
+          }
+
+          .filter_list_item_${data.color.replace('#', '')}:has(input:checked) input:checked + span {
+            border-color: ${data.color} !important;
+          }
+
+          .filter_list_item_${data.color.replace('#', '')}:has(input:checked) input:checked + span::after {
+            background: ${data.color} !important;
+          }
+          `
+      })
+      .join(`\n`)}
+`);
 
 export const [filterFold, setFilterFold] = Dom.state(false);
 

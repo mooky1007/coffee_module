@@ -15,6 +15,10 @@
   @include MachineSelector;
 
   .quadrants_header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: rem(145px);
     border-top: 6px solid #eee;
     margin-top: rem(30px);
     padding-top: rem(30px);

@@ -3,15 +3,20 @@
 @mixin QuadrantsTitle {
   ul {
     position: relative;
-    align-items: flex-end;
+    width: 100%;
+    align-items: center;
+    flex: 1 0 auto;
   }
   h2 {
-    padding-top: rem(10px);
     text-align: left;
-    height: rem(58px);;
+    flex: 1 0 0;
 
-    strong:nth-of-type(2) {
-      font-weight: 700;
+    strong {
+      position: relative;
+
+      &:nth-of-type(2) {
+        font-weight: 700;
+      }
     }
   }
   button {
