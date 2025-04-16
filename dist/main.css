@@ -120,6 +120,7 @@ button.active {background: #111; color: #fff;}
 #wrapper section + section {margin-top: 0.625rem;}
 #wrapper section ul {display: flex; justify-content: space-between; align-items: center; gap: 0.3125rem;}
 #wrapper .product_list {border-top: 6px solid #eee; margin-top: 1.875rem; padding-top: 1.875rem;}
+#wrapper .product_list h2 {text-align: left;}
 #wrapper .product_list ul {display: flex; width: 100%; flex-direction: column; justify-content: flex-start; gap: 0.625rem;}
 #wrapper .product_list ul li {display: flex; width: 100%; margin: 0 auto; justify-content: flex-start; align-items: flex-start; border-radius: 0.3125rem; border: 1px solid #ddd; padding: 1.25rem; gap: 1.25rem;}
 #wrapper .product_list ul li .thumb_box {background: #eee; width: 5rem; height: 5rem; position: relative; overflow: hidden;}
