@@ -9,7 +9,7 @@
   margin: 0 auto;
   padding-bottom: rem(60px);
 
-  @include respond(425px) {
+  @include respond(768px) {
     max-width: 100%;
   }
   & > section {

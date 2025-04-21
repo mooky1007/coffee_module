@@ -14,6 +14,7 @@ import esbuild from 'gulp-esbuild';
 import plumber from 'gulp-plumber';
 import browserSync from 'browser-sync';
 const reload = browserSync.reload;
+const stream = browserSync.stream;
 const sass = gulpSass(dartSass);
 
 export const js = () => {
@@ -36,14 +37,14 @@ export const js = () => {
             })
         )
         .pipe(dest('dist'))
-        .pipe(reload({ stream: true }));
+        .pipe(reload({stream: true}));
 };
 
 export const html = () => {
     return src(`src/index.html`)
         .pipe(replace('../', './'))
         .pipe(dest('./'))
-        .pipe(reload({ stream: true }));
+        .pipe(reload({stream: true}));
 };
 export const scss = () => {
     return src(`src/scss/main.scss`)
@@ -72,7 +73,7 @@ export const scss = () => {
         )
         .pipe(replace(/^\s*[\r\n]/gm, ''))
         .pipe(dest('dist'))
-        .pipe(reload({ stream: true }));
+        .pipe(stream());
 };
 export const build = parallel(js, scss);
 
