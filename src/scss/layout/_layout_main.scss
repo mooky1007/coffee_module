@@ -5,11 +5,11 @@
   background: #fff;
   width: 100%;
   min-height: 100vh;
-  max-width: 375px;
+  max-width: 425px;
   margin: 0 auto;
   padding-bottom: rem(60px);
 
-  @include respond(768px) {
+  @include respond(1024px) {
     max-width: 100%;
   }
   & > section {
