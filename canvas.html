@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>베인리치 캔버스</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <!-- <script src="/vanerich_anime.js"></script> -->
+  <script src="/vanerich_anime01.js"></script>
+  <script src="/vanerich_anime02.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      -webkit-tap-highlight-color: transparent;
+      /* 터치 하이라이트 제거 */
+      outline: none;
+      /* 포커스 아웃라인 제거 */
+      touch-action: manipulation;
+      /* 터치 제스처 최소화 */
+      user-select: none;
+      /* 텍스트 선택 방지 */
+    }
+
+    #markerLabel {
+      position: absolute;
+      pointer-events: none;
+      white-space: nowrap;
+      background: rgba(0, 0, 0, 0.7);
+      color: rgb(192, 132, 72);
+      padding: 4px 20px;
+      border-radius: 4px;
+      font-size: 12px;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: none;
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    section {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .row {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .col {
+      box-sizing: border-box;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      gap: 20px;
+
+
+      background: #090909;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      flex: 1 0 0;
+    }
+
+    .col:hover {
+      background: #1B1B1B;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0px;
+      gap: 16px;
+
+      width: 336px;
+      height: 33px;
+
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+
+    }
+
+    .num {
+      /* Frame 97 */
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+
+      width: 28px;
+      height: 28px;
+
+      background: rgba(255, 255, 255, 0.1);
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+
+    }
+
+    .num span {
+      /* 2 */
+
+      width: 9px;
+      height: 19px;
+
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+      letter-spacing: -0.05em;
+
+      color: rgba(255, 255, 255, 0.5);
+
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    .title p {
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 33px;
+      /* identical to box height */
+      letter-spacing: -0.05em;
+
+      color: #FFFFFF;
+
+
+      /* Inside auto layout */
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+
+    }
+
+    p {
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 26px;
+      /* or 162% */
+      letter-spacing: -0.05em;
+
+      color: #888888;
+    }
+
+    .canvas_container {
+      margin-top: auto;
+    }
+
+    button {
+      /* Frame 21 */
+
+      box-sizing: border-box;
+      cursor: pointer;
+
+      /* Auto layout */
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 12px 20px;
+      gap: 10px;
+
+      height: 43px;
+
+      background: #090909;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 40px;
+
+      /* Inside auto layout */
+      flex: none;
+      order: 4;
+      flex-grow: 0;
+
+
+    }
+
+    .col:hover button {
+      background: #FFFFFF1A;
+    }
+
+    button span {
+      /* USE NOW ↗ */
+
+      height: 19px;
+      position: relative;
+      top: -1px;
+      font-family: 'Manrope';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+
+      color: #FFFFFF;
+
+
+      /* Inside auto layout */
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+
+    }
+  </style>
+</head>
+
+<body>
+  <section style="height: 80vh;">
+    <div class="row">
+      <div class="col">
+        <div class="title">
+          <div class="num">
+            <span>1</span>
+          </div>
+          <p>Cride</p>
+        </div>
+        <p>
+          크리드 시스템은 국내 최초 전문직 그룹을 위한<br>
+          컨설팅 프로그램으로 제작 되었습니다.<br>
+          초회 상담부터 컨설팅 제안까지 폭넓게 활용이 가능합니다.<br>
+        </p>
+        <div class="canvas_container">
+          <canvas id="cride_system_logic_cride"></canvas>
+        </div>
+        <button>
+          <span>USE NOW ↗</span>
+
+        </button>
+      </div>
+      <div class="col">
+        <div class="title">
+          <div class="num">
+            <span>2</span>
+          </div>
+          <p>API</p>
+        </div>
+        <p>
+          국내 최대 규모의 KODATA(한국평가데이터)와 제휴하여<br>
+          신속하고 적시성 있는 기업의 주요 원천 데이터를<br>
+          실시간으로 확보하여,<br>
+          다양한 컨설팅 모듈에 적용됩니다.<br>
+        </p>
+        <div class="canvas_container">
+          <canvas id="cride_system_logic_api"></canvas>
+        </div>
+        <button>
+          <span>KODATA NOW ↗</span>
+
+        </button>
+      </div>
+      <div class="col">
+        <div class="title">
+          <div class="num">
+            <span>3</span>
+          </div>
+          <p>Developer Docs</p>
+        </div>
+        <p>
+          전문직 맞춤형 컨설팅 프로그램으로 설계되어 법인 결산<br>
+          데이터를 업로드하면 보다 정확한 컨설팅 시뮬레이션<br>
+          모듈이 작동됩니다. 특히 업체 숫자가 많은 경우<br>
+          대량 업로드 또한 가능합니다.
+        </p>
+        <div class="canvas_container">
+          <canvas id="cride_system_logic_dev"></canvas>
+        </div>
+        <button>
+          <span>CRIDE MORE ↗</span>
+
+        </button>
+      </div>
+    </div>
+  </section>
+  <section id="big_ai_wave">
+    <canvas></canvas>
+    <div id="markerLabel" class="marker-label"></div>
+  </section>
+
+  <script>
+    new CrideSystem01('#cride_system_logic_cride', {
+      duration: 5000,
+      vLineCount: 5,
+      space: 0.1,
+      hoverContainer: '.col'
+    });
+
+    new CrideSystem02('#cride_system_logic_api', {
+      duration: 5000,
+      space: 0.11,
+      hoverContainer: '.col'
+    });
+
+    new CrideSystem03('#cride_system_logic_dev', {
+      duration: 5000,
+      space: 0.1,
+      hoverContainer: '.col'
+    });
+
+    new CircleLine('#big_ai_wave')
+  </script>
+</body>
+
+</html>

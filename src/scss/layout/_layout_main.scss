@@ -1,10 +1,6 @@
 @use "../abstracts/functions" as *;
 @use "../abstracts/mixins" as *;
 
-html {
-  font-size: 16px;
-}
-
 #wrapper {
   background: #fff;
   width: 100%;

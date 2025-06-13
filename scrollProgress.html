@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    section {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .target {
+      position: relative;
+      background: #666;
+      height: 800vh;
+    }
+
+    .box {
+      position: sticky;
+      top: 0;
+      background: #333;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      /* clip-path: polygon(10% 10%, 90% 10%, 90% 90%, 10% 90%); */
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    ul {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    li {
+      background: #642828;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 120px;
+      color: #fff;
+
+      list-style: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    li:nth-of-type(1) {
+      background: #642828;
+    }
+
+    li:nth-of-type(2) {
+      background: #282f64;
+    }
+
+    li:nth-of-type(3) {
+      background: #0e3110;
+    }
+
+    .p1,
+    .p2 {
+      color: #fff;
+      font-size: 40px;
+      position: absolute;
+    }
+
+    .video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <section></section>
+  <section class="target">
+    <div class="box">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+
+      <p class="p1">ㅎㅎ</p>
+      <p class="p2">ㅋㅋ</p>
+
+      <div class="video">
+        <video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" muted></video>
+      </div>
+    </div>
+  </section>
+  <section style="background: blue;"></section>
+
+  <script>
+    let currentScroll = window.scrollY;
+    const target = document.querySelector('.target');
+    const targetY = window.pageYOffset + target.getBoundingClientRect().top
+    const targetHeight = target.getBoundingClientRect().height - window.innerHeight;
+    const clacCurStatus = (s, e, p) => {
+      return p * (e - s) + s;
+    }
+
+    const calcProgress = (cur, max) => {
+      let progress = cur / max;
+      if (progress < 0) progress = 0;
+      if (progress > 1) progress = 1;
+      return progress;
+    }
+
+    const diviedProgress = (progress, count) => new Array(count).fill(0).map((_, i) => calcProgress(progress - (i * 1 / count), 1 / count));
+    const floatUpLi = (target, p) => target.style.cssText = `transform: translateY(${(p * (0 - 100)) + 100}%);`
+
+    const func = () => {
+      const progress = calcProgress(window.pageYOffset - targetY, targetHeight);
+      const bigFour = diviedProgress(progress, 5);
+      const bigOneofChild = diviedProgress(bigFour[0], 3)
+      const bigThreeofChild = diviedProgress(bigFour[2], 2)
+
+      const videoPlay = diviedProgress(bigFour[4], 3)
+
+      document.querySelectorAll('.box li').forEach((li, idx) => {
+        floatUpLi(li, bigOneofChild[idx])
+      })
+
+      document.querySelector('.box ul').style.cssText = `
+        width:${clacCurStatus(600, window.innerWidth, bigFour[1])}px;
+        height:${clacCurStatus(600, window.innerHeight, bigFour[1])}px;
+        transform: translateX(${clacCurStatus(0, 100, bigFour[3])}%);
+      `
+
+      document.querySelector('.p1').style.cssText = `
+            opacity: ${clacCurStatus(0, 1, bigThreeofChild[0])};
+            scale: ${clacCurStatus(100, 1, bigFour[2])};
+          `
+
+      document.querySelector('.p2').style.cssText = `
+            opacity: ${clacCurStatus(0, 1, bigThreeofChild[0])};
+            scale: ${clacCurStatus(1, 100, bigFour[2])};
+          `
+
+      document.querySelectorAll('p').forEach(p => {
+        if (progress < 0.75) return
+        p.style.opacity = clacCurStatus(1, 0, bigFour[3])
+      })
+
+      document.querySelector('.video').style.cssText = `
+            transform: translateY(${clacCurStatus(100, 0, videoPlay[0])}%);
+          `
+
+      if (videoPlay[0] >= 1) {
+        document.querySelector('.video video').play();
+      }
+
+    }
+
+    window.addEventListener('scroll', func);
+    func();
+  </script>
+</body>
+
+</html>
