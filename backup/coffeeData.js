@@ -2,30 +2,30 @@ const filterList = [
     {
         name: '디카페인',
         filterKey: 'decaf',
-        color: '#55000',
+        color: '#94473c',
         iconUrl: '/icon/mild.png',
         items: ['7000.60', '7015.60', '7023.60', '7057.60', '7864.80', '7862.80', '7857.80'],
     },
     {
         name: '아이스',
         filterKey: 'ice',
-        color: '#55000',
+        color: '#4badd1',
         iconUrl: '/icon/mild.png',
-        items: ['7018.60'],
+        items: ['7018.60', '7029.60', '7027.60', '7128.91', '7047.60', '7044.60', '7058.60', '7017.60', '7719.70', '7588.40', '7865.80', '7889.80'],
     },
     {
         name: '스타벅스',
         filterKey: 'star',
-        color: '#55000',
+        color: '#0d6243',
         iconUrl: '/icon/mild.png',
-        items: [],
+        items: ['7133.91', '2116.91', '2117.91', '7125.91', '7126.91', '7127.91', '7128.91', '7130.91'],
     },
     {
         name: '밀크',
         filterKey: 'milk',
-        color: '#55000',
+        color: '#d3ab89',
         iconUrl: '/icon/mild.png',
-        items: [],
+        items: ['7016.60', '7002.60', '7042.60', '7058.60', '7044.60', '7048.60', '7039.60', '7882.80', '7895.80', '7888.80', '7868.80'],
     },
 ];
 
@@ -1115,31 +1115,11 @@ const coffeeData = {
 };
 
 class CoffeeFinder {
-    constructor(type) {
+    constructor() {
+        this.cells = {};
         this.filterData = new Set();
-        this.changeType(type);
 
-        if (window.napi) this.getData();
-        else this.init();
-
-        this.bubbleData = {
-            count: 1,
-        };
-
-        const bubble = document.querySelector('.product_bubble');
-        const bubblePlus = bubble.querySelector('.btn_plus');
-        const bubbleMinus = bubble.querySelector('.btn_minus');
-
-        bubblePlus.addEventListener('click', () => {
-            this.bubbleData.count += 1;
-            this.renderBubble();
-        });
-
-        bubbleMinus.addEventListener('click', () => {
-            this.bubbleData.count -= 1;
-            if (this.bubbleData.count < 1) this.bubbleData.count = 1;
-            this.renderBubble();
-        });
+        this.init();
 
         document.querySelectorAll('.filter_item input').forEach((input) => {
             input.addEventListener('change', (e) => {
@@ -1163,8 +1143,9 @@ class CoffeeFinder {
                     }
                 }
 
+                this.layer.close();
                 this.render();
-                this.tagUpdate();
+                this.updateComponents().filterTags();
             });
         });
 
@@ -1183,104 +1164,317 @@ class CoffeeFinder {
         });
     }
 
-    tagUpdate() {
-        if (this.filterData.size === 0) {
-            document.querySelector('.tags').setAttribute('style', 'display: none !important;');
-        } else {
-            document.querySelector('.tags').removeAttribute('style');
-            document.querySelector('.tags').innerHTML = Array.from(this.filterData)
-                .map((tag) => `<button class="${tag}"><span>#${filterList.find((item) => item.filterKey === tag)?.name || ''}</span></button>`)
-                .join('');
-        }
-    }
+    async init() {
+        await this.getData();
+        this.setComponents().cellItems(Object.values(this.originData).flat());
+        this.setComponents().productItems(Object.values(this.originData).flat());
+        this.setComponents().layerEl(Object.values(this.originData).flat());
 
-    async getData() {
-        await Promise.all(
-            coffeeData.ol.map(async (cur) => {
-                const result = await window.napi.catalog().getProduct(cur.sku);
-                cur.headline = result.headline;
-                cur.icon = result.mobileImages.icon;
-                cur.capsuleProductAromatics = result.capsuleProductAromatics;
-                cur.inStock = result.inStock;
-                cur.price = result.price;
-                cur.salesMultiple = result.salesMultiple;
-                return cur;
-            }),
-            coffeeData.vl.map(async (cur) => {
-                const result = await window.napi.catalog().getProduct(cur.sku);
-                cur.headline = result.headline;
-                cur.icon = result.mobileImages.icon;
-                cur.capsuleProductAromatics = result.capsuleProductAromatics;
-                cur.inStock = result.inStock;
-                cur.price = result.price;
-                cur.salesMultiple = result.salesMultiple;
-                return cur;
-            })
-        );
-    }
+        this.setType('vl');
 
-    init() {
-        const topLeft = document.querySelectorAll('.content .area .top_left button');
-        const topRight = document.querySelectorAll('.content .area .top_right button');
-        const bottomRight = document.querySelectorAll('.content .area .bottom_right button');
-        const bottomLeft = document.querySelectorAll('.content .area .bottom_left button');
-
-        this.setGridPosition(topLeft, -5, -1, -5, -1);
-        this.setGridPosition(topRight, -5, -1, 1, 5);
-        this.setGridPosition(bottomRight, 1, 5, 1, 5);
-        this.setGridPosition(bottomLeft, 1, 5, -5, -1);
-
-        document.querySelector('.content .area').addEventListener('click', (e) => {
-            const target = e.target.closest('button');
-            if (!target) return;
-            if (target.querySelector('.capsule').dataset.sku) {
-                const sku = target.querySelector('.capsule').dataset.sku;
-                const result = this.data.find((el) => el.sku === sku);
-
-                this.showBubble(result, target);
-            }
-        });
+        this.layer = this.setComponents().areaLayer();
+        this.setComponents().areaCell();
+        this.setComponents().mobileFilterTags();
 
         this.render();
     }
 
-    showBubble(data, el) {
-        const bubble = document.querySelector('.product_bubble');
-        this.bubbleData.data = data;
-        this.bubbleData.count = 1;
+    async getData() {
+        this.originData = coffeeData;
+        if (!window.napi) this.setStarbucksData(Object.values(this.originData).flat());
+        else {
+            await Promise.all(
+                this.originData.ol.map(async (cur) => {
+                    const result = await window.napi.catalog().getProduct(cur.sku);
+                    cur.headline = result.headline;
+                    cur.icon = result.mobileImages.icon;
+                    cur.capsuleProductAromatics = result.capsuleProductAromatics;
+                    cur.inStock = result.inStock;
+                    cur.price = result.price;
+                    cur.salesMultiple = result.salesMultiple;
+                    return cur;
+                }),
+                this.originData.vl.map(async (cur) => {
+                    const result = await window.napi.catalog().getProduct(cur.sku);
+                    cur.headline = result.headline;
+                    cur.icon = result.mobileImages.icon;
+                    cur.capsuleProductAromatics = result.capsuleProductAromatics;
+                    cur.inStock = result.inStock;
+                    cur.price = result.price;
+                    cur.salesMultiple = result.salesMultiple;
+                    return cur;
+                })
+            );
 
-        this.renderBubble();
-        bubble.classList.remove('hide');
-
-        const offest = document.querySelector('.key_body').getBoundingClientRect().top + window.pageYOffset;
-        bubble.style.top = `${el.getBoundingClientRect().top + window.pageYOffset - offest - bubble.getBoundingClientRect().height / 4}px`;
-        bubble.style.left = `${el.getBoundingClientRect().left - bubble.getBoundingClientRect().width / 2}px`;
+            this.setStarbucksData(Object.values(this.originData).flat());
+        }
     }
 
-    renderBubble() {
-        const bubble = document.querySelector('.product_bubble');
-        const { data } = this.bubbleData;
-
-        bubble.querySelector('.thumbnail img').setAttribute('src', `https://www.nespresso.com${data.icon}`);
-        bubble.querySelector('.product_bubble_title').textContent = data.name;
-        bubble.querySelector('.product_bubble_desc p:first-child').textContent = data.capsuleProductAromatics.join(' ,');
-        bubble.querySelector('.product_bubble_desc p:last-child').textContent = data.headline;
-        bubble.querySelector('.product_bubble_control .price').textContent =
-            `₩ ${(this.bubbleData.count * data.price * data.salesMultiple).toLocaleString()}`;
-        bubble.querySelector('.product_bubble_control .counter p').textContent =
-            `${this.bubbleData.count} (${this.bubbleData.count * data.salesMultiple})`;
+    setStarbucksData(data) {
+        data.forEach((coffee) => (coffee.name = coffee.name.replace('스타벅스®', '<span style="color:#0d6243;">스타벅스<sup>®</sup></span><br>')));
     }
 
-    closeBubble() {
-        const bubble = document.querySelector('.product_bubble');
-        bubble.classList.add('hide');
+    setComponents() {
+        return {
+            areaCell: () => {
+                const setEl = () => {
+                    this.cells.topLeft = document.querySelectorAll('.content .area .top_left button');
+                    this.cells.topRight = document.querySelectorAll('.content .area .top_right button');
+                    this.cells.bottomRight = document.querySelectorAll('.content .area .bottom_right button');
+                    this.cells.bottomLeft = document.querySelectorAll('.content .area .bottom_left button');
+                };
+
+                const setAreaGridPosition = () => {
+                    this.setGridPosition(this.cells.topLeft, -5, -1, -5, -1);
+                    this.setGridPosition(this.cells.topRight, -5, -1, 1, 5);
+                    this.setGridPosition(this.cells.bottomRight, 1, 5, 1, 5);
+                    this.setGridPosition(this.cells.bottomLeft, 1, 5, -5, -1);
+                };
+
+                const cellEvent = ({ target }) => {
+                    const cell = target.closest('button');
+                    if (!cell) return;
+                    if (cell.querySelector('.capsule').dataset.sku) {
+                        const sku = cell.querySelector('.capsule').dataset.sku;
+                        const result = this.data.find((el) => el.sku === sku);
+
+                        this.layer.set(result, cell);
+                    }
+                };
+
+                setEl();
+                setAreaGridPosition();
+
+                Object.values(this.cells)
+                    .map((el) => Array.from(el))
+                    .flat()
+                    .forEach((cell) => cell.addEventListener('click', cellEvent));
+            },
+            areaLayer: () => {
+                this.areaLayer = document.querySelector('.product_bubble');
+                return {
+                    set: (data, target) => {
+                        this.areaLayer.classList.remove('hide');
+                        this.areaLayer.innerHTML = '';
+                        this.areaLayer.append(...data.layerEl);
+
+                        const keyBody = document.querySelector('.key_body');
+                        const bodyOffsetX = keyBody.getBoundingClientRect().left + window.pageXOffset;
+                        const bodyOffsetY = keyBody.getBoundingClientRect().top + window.pageYOffset;
+
+                        const { top, left, width } = target.getBoundingClientRect();
+                        const layerRect = this.areaLayer.getBoundingClientRect();
+                        this.areaLayer.style.top = `${top + window.pageYOffset - bodyOffsetY - layerRect.height}px`;
+                        this.areaLayer.style.left = `${left + window.pageXOffset - bodyOffsetX + width / 2 - layerRect.width / 2}px`;
+                    },
+                    close: () => {
+                        this.areaLayer.classList.add('hide');
+                    },
+                };
+            },
+            cellItems: (data) => {
+                data.forEach((cellData) => {
+                    const cell = document.createElement('div');
+                    cell.classList.add('capsule');
+                    cell.dataset.sku = cellData.sku;
+                    const capsuleImage = document.createElement('img');
+                    capsuleImage.setAttribute('src', `https://www.nespresso.com${cellData.icon || ''}`);
+
+                    const capsuleInfo = document.createElement('div');
+                    capsuleInfo.classList.add('info');
+
+                    const capsuleNmae = document.createElement('p');
+                    capsuleNmae.innerHTML = cellData.name;
+
+                    capsuleInfo.append(capsuleNmae);
+
+                    cell.append(capsuleImage);
+
+                    cellData.el = [cell, capsuleInfo];
+                });
+            },
+            productItems: (data) => {
+                data.forEach((cellData) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.classList.add('thumbnail');
+                    const image = document.createElement('img');
+                    image.src = `https://www.nespresso.com${cellData.icon}`;
+                    thumbnail.append(image);
+
+                    const info = document.createElement('div');
+                    info.classList.add('info');
+                    const title = document.createElement('div');
+                    title.classList.add('item_title');
+                    const desc = document.createElement('div');
+                    desc.classList.add('item_desc');
+                    const buttonwrap = document.createElement('div');
+                    buttonwrap.classList.add('item_button_wrap');
+
+                    title.innerHTML = cellData.name;
+                    desc.innerHTML = `
+                      <p>${cellData.capsuleProductAromatics.join(' ,')}</p>
+                      <p>${cellData.headline}</p>
+                    `;
+
+                    const price = document.createElement('div');
+
+                    price.classList.add('item_price');
+
+                    buttonwrap.append(price);
+
+                    const itemHandle = document.createElement('div');
+                    itemHandle.classList.add('item_handle');
+
+                    const itemCntHandle = document.createElement('div');
+                    itemCntHandle.classList.add('item_cnt_handle');
+
+                    const minusButton = document.createElement('button');
+                    minusButton.classList.add('minus_button');
+                    const count = document.createElement('p');
+                    const plusButton = document.createElement('button');
+                    plusButton.classList.add('plus_button');
+
+                    plusButton.addEventListener('click', () => {
+                        count.setAttribute('value', +count.getAttribute('value') + 1);
+                        renderCount();
+                    });
+
+                    count.setAttribute('value', 1);
+
+                    const renderCount = () => {
+                        price.textContent = `₩ ${(cellData.price * cellData.salesMultiple * +count.getAttribute('value')).toLocaleString()}`;
+                        count.textContent = `${+count.getAttribute('value')} (${+count.getAttribute('value') * cellData.salesMultiple})`;
+                    };
+
+                    renderCount();
+
+                    itemCntHandle.append(minusButton, count, plusButton);
+
+                    const itemCartButton = document.createElement('div');
+                    itemCartButton.classList.add('item_cart_button');
+
+                    itemHandle.append(itemCntHandle, itemCartButton);
+
+                    buttonwrap.append(price, itemHandle);
+
+                    info.append(title, desc, buttonwrap);
+
+                    cellData.prdEl = [thumbnail, info];
+                });
+            },
+            layerEl: (data) => {
+                data.forEach((cellData) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.classList.add('thumbnail');
+                    const img = document.createElement('img');
+                    img.setAttribute('src', `https://www.nespresso.com${cellData.icon}`);
+
+                    thumbnail.append(img);
+
+                    const info = document.createElement('div');
+                    info.classList.add('info');
+
+                    const title = document.createElement('div');
+                    title.classList.add('product_bubble_title');
+                    title.innerHTML = cellData.name;
+
+                    const desc = document.createElement('div');
+                    desc.classList.add('product_bubble_desc');
+
+                    const p1 = document.createElement('p');
+                    const p2 = document.createElement('p');
+
+                    p1.textContent = cellData.capsuleProductAromatics.join(' ,');
+                    p2.textContent = cellData.headline;
+
+                    desc.append(p1, p2);
+
+                    const productLayerControl = document.createElement('div');
+                    productLayerControl.classList.add('product_bubble_control');
+                    const price = document.createElement('p');
+                    price.classList.add('price');
+                    price.dataset.value = 1;
+                    price.textContent = `₩ ${(+price.dataset.value * cellData.price * cellData.salesMultiple).toLocaleString()}`;
+
+                    const counter = document.createElement('div');
+                    counter.classList.add('counter');
+
+                    const buttonMinus = document.createElement('button');
+                    const count = document.createElement('p');
+                    const buttonPlus = document.createElement('button');
+
+                    buttonMinus.addEventListener('click', () => {
+                        price.dataset.value = +price.dataset.value - 1;
+                        if (+price.dataset.value < 0) price.dataset.value = 1;
+                        price.textContent = `₩ ${(+price.dataset.value * cellData.price * cellData.salesMultiple).toLocaleString()}`;
+                        count.textContent = `${+price.dataset.value} (${+price.dataset.value * cellData.salesMultiple})`;
+                    });
+                    buttonPlus.addEventListener('click', () => {
+                        price.dataset.value = +price.dataset.value + 1;
+                        price.textContent = `₩ ${(+price.dataset.value * cellData.price * cellData.salesMultiple).toLocaleString()}`;
+                        count.textContent = `${+price.dataset.value} (${+price.dataset.value * cellData.salesMultiple})`;
+                    });
+
+                    buttonMinus.classList.add('btn_minus');
+                    count.textContent = `${+price.dataset.value} (${+price.dataset.value * cellData.salesMultiple})`;
+                    buttonPlus.classList.add('btn_plus');
+
+                    counter.append(buttonMinus, count, buttonPlus);
+
+                    const addCart = document.createElement('button');
+                    addCart.classList.add('add_cart');
+
+                    productLayerControl.append(price, counter, addCart);
+
+                    info.append(title, desc, productLayerControl);
+
+                    const layerCloseButton = document.createElement('button');
+                    layerCloseButton.classList.add('product_bubble_close');
+                    layerCloseButton.addEventListener('click', () => {
+                        this.layer.close();
+                    });
+
+                    cellData.layerEl = [thumbnail, info, layerCloseButton];
+                });
+            },
+            mobileFilterTags: () => {
+                this.filterTags = new Map();
+                this.tagArea = document.querySelector('.tags');
+
+                filterList.forEach((filter) => {
+                    const tagsButton = document.createElement('button');
+                    tagsButton.style.backgroundColor = filter.color;
+                    const tagsSpan = document.createElement('span');
+                    tagsSpan.textContent = `#${filter.name}`;
+
+                    tagsButton.append(tagsSpan);
+                    this.filterTags.set(filter.filterKey, tagsButton);
+                });
+            },
+        };
     }
 
-    changeType(type) {
+    updateComponents() {
+        return {
+            filterTags: () => {
+                if (this.filterData.size === 0) {
+                    this.tagArea.setAttribute('style', 'display: none !important;');
+                } else {
+                    this.tagArea.removeAttribute('style');
+                    this.tagArea.innerHTML = '';
+                    Array.from(this.filterData).forEach((key) => {
+                        this.tagArea.append(this.filterTags.get(key));
+                    });
+                }
+            },
+        };
+    }
+
+    setType(type) {
         this.type = type;
-        this.data = coffeeData[this.type];
+        this.data = this.originData[this.type];
 
-        this.closeBubble();
+        this.layer?.close();
         this.resetContent();
         this.render();
         this.renderPrd();
@@ -1317,6 +1511,7 @@ class CoffeeFinder {
     }
 
     moveArea(e) {
+        this.layer.close();
         const direction = e.target.closest('button').classList[1];
         switch (direction) {
             case 'top':
@@ -1407,85 +1602,9 @@ class CoffeeFinder {
                 const [x, y] = coffee.properties;
                 const target = this.getCell(x, y);
                 if (!target) return;
-                target.innerHTML = `
-              <div class="capsule" ${coffee.sku ? `data-sku=${coffee.sku}` : ''}>
-                <img src="https://www.nespresso.com${coffee.icon || ''}" alt="">
-              </div>
-              <div class="info">
-                <p>${coffee.name}</p>
-              </div>`;
+                target.innerHTML = ``;
+                target.append(...coffee.el);
             });
-    }
-
-    createItem(data) {
-        const result = document.createElement('li');
-        result.classList.add('swiper-slide');
-        const thumbnail = document.createElement('div');
-        thumbnail.classList.add('thumbnail');
-        const image = document.createElement('img');
-        image.src = `https://www.nespresso.com${data.icon}`;
-        thumbnail.append(image);
-
-        const info = document.createElement('div');
-        info.classList.add('info');
-        const title = document.createElement('div');
-        title.classList.add('item_title');
-        const desc = document.createElement('div');
-        desc.classList.add('item_desc');
-        const buttonwrap = document.createElement('div');
-        buttonwrap.classList.add('item_button_wrap');
-
-        title.innerHTML = data.name;
-        desc.innerHTML = `
-        <p>${data.capsuleProductAromatics.join(' ,')}</p>
-        <p>${data.headline}</p>
-        `;
-
-        const price = document.createElement('div');
-
-        price.classList.add('item_price');
-
-        buttonwrap.append(price);
-
-        const itemHandle = document.createElement('div');
-        itemHandle.classList.add('item_handle');
-
-        const itemCntHandle = document.createElement('div');
-        itemCntHandle.classList.add('item_cnt_handle');
-
-        const minusButton = document.createElement('button');
-        minusButton.classList.add('minus_button');
-        const count = document.createElement('p');
-        const plusButton = document.createElement('button');
-        plusButton.classList.add('plus_button');
-
-        plusButton.addEventListener('click', () => {
-            count.setAttribute('value', +count.getAttribute('value') + 1);
-            renderCount();
-        });
-
-        count.setAttribute('value', 1);
-
-        const renderCount = () => {
-            price.textContent = `₩ ${(data.price * data.salesMultiple * +count.getAttribute('value')).toLocaleString()}`;
-            count.textContent = `${+count.getAttribute('value')} (${+count.getAttribute('value') * data.salesMultiple})`;
-        };
-
-        renderCount();
-
-        itemCntHandle.append(minusButton, count, plusButton);
-
-        const itemCartButton = document.createElement('div');
-        itemCartButton.classList.add('item_cart_button');
-
-        itemHandle.append(itemCntHandle, itemCartButton);
-
-        buttonwrap.append(price, itemHandle);
-
-        info.append(title, desc, buttonwrap);
-        result.append(thumbnail, info);
-
-        return result;
     }
 
     createMoItem(data3) {
@@ -1579,10 +1698,13 @@ class CoffeeFinder {
                 case 'top_right':
                     this.data
                         .filter((cf) => {
-                            return cf.properties[0] > 0 || cf.properties[1] < 0;
+                            return cf.properties[0] > 0 && cf.properties[1] < 0;
                         })
                         .forEach((cf) => {
-                            el.querySelector('.swiper-wrapper').append(this.createItem(cf));
+                            const result = document.createElement('li');
+                            result.classList.add('swiper-slide');
+                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
+                            el.querySelector('.swiper-wrapper').append(result);
                         });
 
                     new Swiper('.product_section_body.pc_only .product_section_category[name=top_right] .swiper', {
@@ -1612,10 +1734,13 @@ class CoffeeFinder {
                 case 'bottom_left':
                     this.data
                         .filter((cf) => {
-                            return cf.properties[0] < 0 || cf.properties[1] > 0;
+                            return cf.properties[0] < 0 && cf.properties[1] > 0;
                         })
                         .forEach((cf) => {
-                            el.querySelector('.swiper-wrapper').append(this.createItem(cf));
+                            const result = document.createElement('li');
+                            result.classList.add('swiper-slide');
+                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
+                            el.querySelector('.swiper-wrapper').append(result);
                         });
                     new Swiper('.product_section_body.pc_only .product_section_category[name=bottom_left] .swiper', {
                         slidesPerView: 1,
@@ -1644,10 +1769,13 @@ class CoffeeFinder {
                 case 'bottom_right':
                     this.data
                         .filter((cf) => {
-                            return cf.properties[0] > 0 || cf.properties[1] > 0;
+                            return cf.properties[0] > 0 && cf.properties[1] > 0;
                         })
                         .forEach((cf) => {
-                            el.querySelector('.swiper-wrapper').append(this.createItem(cf));
+                            const result = document.createElement('li');
+                            result.classList.add('swiper-slide');
+                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
+                            el.querySelector('.swiper-wrapper').append(result);
                         });
                     new Swiper('.product_section_body.pc_only .product_section_category[name=bottom_right] .swiper', {
                         slidesPerView: 1,
@@ -1676,10 +1804,13 @@ class CoffeeFinder {
                 case 'top_left':
                     this.data
                         .filter((cf) => {
-                            return cf.properties[0] < 0 || cf.properties[1] < 0;
+                            return cf.properties[0] < 0 && cf.properties[1] < 0;
                         })
                         .forEach((cf) => {
-                            el.querySelector('.swiper-wrapper').append(this.createItem(cf));
+                            const result = document.createElement('li');
+                            result.classList.add('swiper-slide');
+                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
+                            el.querySelector('.swiper-wrapper').append(result);
                         });
                     new Swiper('.product_section_body.pc_only .product_section_category[name=top_left] .swiper', {
                         slidesPerView: 1,
@@ -1711,7 +1842,10 @@ class CoffeeFinder {
                             return filterList.find((filter) => filter.filterKey === 'decaf').items.includes(cf.sku);
                         })
                         .forEach((cf) => {
-                            el.querySelector('.swiper-wrapper').append(this.createItem(cf));
+                            const result = document.createElement('li');
+                            result.classList.add('swiper-slide');
+                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
+                            el.querySelector('.swiper-wrapper').append(result);
                         });
                     new Swiper('.product_section_body.pc_only .product_section_category[name=decaf] .swiper', {
                         slidesPerView: 1,
@@ -1764,7 +1898,7 @@ class CoffeeFinder {
                 case 'top_right':
                     chunked = [];
                     data = this.data.filter((cf) => {
-                        return cf.properties[0] > 0 || cf.properties[1] < 0;
+                        return cf.properties[0] > 0 && cf.properties[1] < 0;
                     });
 
                     for (let i = 0; i < data.length; i += 3) {
@@ -1779,7 +1913,7 @@ class CoffeeFinder {
                 case 'bottom_left':
                     chunked = [];
                     data = this.data.filter((cf) => {
-                        return cf.properties[0] < 0 || cf.properties[1] > 0;
+                        return cf.properties[0] < 0 && cf.properties[1] > 0;
                     });
 
                     for (let i = 0; i < data.length; i += 3) {
@@ -1794,7 +1928,7 @@ class CoffeeFinder {
                 case 'bottom_right':
                     chunked = [];
                     data = this.data.filter((cf) => {
-                        return cf.properties[0] > 0 || cf.properties[1] > 0;
+                        return cf.properties[0] > 0 && cf.properties[1] > 0;
                     });
 
                     for (let i = 0; i < data.length; i += 3) {
@@ -1809,7 +1943,7 @@ class CoffeeFinder {
                 case 'top_left':
                     chunked = [];
                     data = this.data.filter((cf) => {
-                        return cf.properties[0] < 0 || cf.properties[1] < 0;
+                        return cf.properties[0] < 0 && cf.properties[1] < 0;
                     });
 
                     for (let i = 0; i < data.length; i += 3) {
@@ -1838,14 +1972,19 @@ class CoffeeFinder {
                     break;
             }
 
-            new Swiper('.product_section_body.mo_only  .swiper', {
-                slidesPerView: 1,
-                slidesPerGroup: 1,
-                spaceBetween: 20,
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-            });
+            if (!this.mobileSwiper) {
+                this.mobileSwiper = new Swiper('.product_section_body.mo_only  .swiper', {
+                    slidesPerView: 1,
+                    slidesPerGroup: 1,
+                    spaceBetween: 20,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                });
+            } else {
+                this.mobileSwiper.slideTo(0);
+                this.mobileSwiper.update();
+            }
         });
     }
 }

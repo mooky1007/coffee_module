@@ -177,14 +177,7 @@
                       <button></button>
                       <button></button>
                       <button></button>
-                      <button>
-                        <div class="capsule">
-                          <img src="./css/images/capsule_dummy.png" alt="">
-                        </div>
-                        <div class="info">
-                          <p>솔레리오</p>
-                        </div>
-                      </button>
+                      <button></button>
                       <button></button>
                       <button></button>
                       <button></button>
@@ -202,15 +195,7 @@
                         <div class="bedge new">NEW</div>
                       </button>
                       <button></button>
-                      <button>
-                        <div class="capsule">
-                          <img src="./css/images/capsule_dummy.png" alt="">
-                        </div>
-                        <div class="info">
-                          <p>솔레리오</p>
-                        </div>
-                        <div class="bedge best">BEST</div>
-                      </button>
+                      <button></button>
                       <button></button>
                       <button></button>
                       <button></button>
@@ -280,26 +265,12 @@
                       <button></button>
                       <button></button>
                       <button></button>
-                      <button>
-                        <div class="capsule">
-                          <img src="./css/images/capsule_dummy.png" alt="">
-                        </div>
-                        <div class="info">
-                          <p>솔레리오</p>
-                        </div>
-                      </button>
                       <button></button>
                       <button></button>
                       <button></button>
                       <button></button>
-                      <button>
-                        <div class="capsule">
-                          <img src="./css/images/capsule_dummy.png" alt="">
-                        </div>
-                        <div class="info">
-                          <p>솔레리오</p>
-                        </div>
-                      </button>
+                      <button></button>
+                      <button></button>
                       <button></button>
                       <button></button>
                       <button></button>
@@ -321,24 +292,22 @@
 
                 <article class="product_bubble hide">
                   <div class="thumbnail">
-                    <img src="./css/images/capsule_dummy.png" alt="">
+                    <img src="" alt="">
                   </div>
                   <div class="info">
-                    <div class="product_bubble_title">돌체</div>
+                    <div class="product_bubble_title"></div>
                     <div class="product_bubble_desc">
-                      <p>건식 가공의 섬세한 꽃향</p>
-                      <p>우유와 어울리는 달콤함</p>
+                      <p></p>
+                      <p></p>
                     </div>
                     <div class="product_bubble_control">
-                      <p class="price">₩ 1,000</p>
+                      <p class="price">₩ 0</p>
                       <div class="counter">
                         <button class="btn_minus"></button>
                         <p>0(0)</p>
                         <button class="btn_plus"></button>
                       </div>
-                      <button class="add_cart">
-
-                      </button>
+                      <button class="add_cart"></button>
                     </div>
                   </div>
                   <button class="product_bubble_close"></button>
@@ -992,10 +961,10 @@
                             </ul>
                           </div>
                         </div>
-                        <div class="swiper-pagination"></div>
                       </div>
                     </div>
                   </articel>
+                  <div class="swiper-pagination"></div>
                 </div>
               </div>
             </section>
@@ -1026,17 +995,17 @@
       });
     }
 
-    const finder = new CoffeeFinder('vl');
+    const finder = new CoffeeFinder();
 
     document.querySelector('.vertuo_button').addEventListener('click', (e) => {
       e.target.closest('.button_wrap').querySelectorAll('button').forEach(button => button.classList.remove('active'))
       e.target.closest('button').classList.add('active');
-      finder.changeType('vl');
+      finder.setType('vl');
     })
     document.querySelector('.original_button').addEventListener('click', (e) => {
       e.target.closest('.button_wrap').querySelectorAll('button').forEach(button => button.classList.remove('active'))
       e.target.closest('button').classList.add('active');
-      finder.changeType('ol');
+      finder.setType('ol');
     })
 
     document.querySelectorAll('.overlay .area button').forEach((area) => area.addEventListener('click', finder.selectContent.bind(finder)));
