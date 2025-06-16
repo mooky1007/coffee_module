@@ -315,7 +315,7 @@
 #quadrantCoffee .key_body .content .area > div {
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 10px 20px;
     width: 440px;
@@ -1658,6 +1658,19 @@
         width: 7.14vw;
         height: 7.14vw;
     }
+    
+    #quadrantCoffee .key_body .content.top_right {
+        transform: scale(1.8) translate(-22%, 22%);
+    }
+    #quadrantCoffee .key_body .content.top_left {
+        transform: scale(1.8) translate(22%, 22%);
+    }
+    #quadrantCoffee .key_body .content.bottom_right {
+        transform: scale(1.8) translate(-22%, -22%);
+    }
+    #quadrantCoffee .key_body .content.bottom_left {
+        transform: scale(1.8) translate(22%, -22%);
+    }
 
     #quadrantCoffee .key_body .content .area_rect > div span {
         font-size: 2.85vw;
@@ -1677,6 +1690,30 @@
     #quadrantCoffee .key_body .content .area_rect.left > div i {
         width: 6.7vw;
         height: 6.7vw;
+    }
+
+    #quadrantCoffee .move_area button.top,
+    #quadrantCoffee .move_area button.right-top,
+    #quadrantCoffee .move_area button.left-top {
+        top: 0;
+    }
+
+    #quadrantCoffee .move_area button.bottom,
+    #quadrantCoffee .move_area button.right-bottom,
+    #quadrantCoffee .move_area button.left-bottom {
+        bottom: 0;
+    }
+
+    #quadrantCoffee .move_area button.right-top,
+    #quadrantCoffee .move_area button.right-bottom,
+    #quadrantCoffee .move_area button.right {
+        right: 0;
+    }
+
+    #quadrantCoffee .move_area button.left-top,
+    #quadrantCoffee .move_area button.left-bottom,
+    #quadrantCoffee .move_area button.left {
+        left: 0;
     }
 
     #quadrantCoffee .move_area button.top,

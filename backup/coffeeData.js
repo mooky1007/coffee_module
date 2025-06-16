@@ -1117,6 +1117,10 @@ const coffeeData = {
 class CoffeeFinder {
     constructor() {
         this.cells = {};
+        this.productOfType = {
+            ol: new Map(),
+            vl: new Map(),
+        };
         this.filterData = new Set();
 
         this.init();
@@ -1167,7 +1171,7 @@ class CoffeeFinder {
     async init() {
         await this.getData();
         this.setComponents().cellItems(Object.values(this.originData).flat());
-        this.setComponents().productItems(Object.values(this.originData).flat());
+        // this.setComponents().productItems(Object.values(this.originData).flat());
         this.setComponents().layerEl(Object.values(this.originData).flat());
 
         this.setType('vl');
@@ -1175,6 +1179,7 @@ class CoffeeFinder {
         this.layer = this.setComponents().areaLayer();
         this.setComponents().areaCell();
         this.setComponents().mobileFilterTags();
+        this.setComponents().pcSwiper();
 
         this.render();
     }
@@ -1224,11 +1229,13 @@ class CoffeeFinder {
                     this.cells.bottomLeft = document.querySelectorAll('.content .area .bottom_left button');
                 };
 
+                // x1, y1, x2, y2
+
                 const setAreaGridPosition = () => {
-                    this.setGridPosition(this.cells.topLeft, -5, -1, -5, -1);
-                    this.setGridPosition(this.cells.topRight, -5, -1, 1, 5);
-                    this.setGridPosition(this.cells.bottomRight, 1, 5, 1, 5);
-                    this.setGridPosition(this.cells.bottomLeft, 1, 5, -5, -1);
+                    this.setGridPosition(this.cells.topLeft, -5, -1, -4, -1);
+                    this.setGridPosition(this.cells.topRight, -5, -1, 1, 4);
+                    this.setGridPosition(this.cells.bottomRight, 1, 5, 1, 4);
+                    this.setGridPosition(this.cells.bottomLeft, 1, 5, -4, -1);
                 };
 
                 const cellEvent = ({ target }) => {
@@ -1293,74 +1300,77 @@ class CoffeeFinder {
                     cellData.el = [cell, capsuleInfo];
                 });
             },
-            productItems: (data) => {
-                data.forEach((cellData) => {
-                    const thumbnail = document.createElement('div');
-                    thumbnail.classList.add('thumbnail');
-                    const image = document.createElement('img');
-                    image.src = `https://www.nespresso.com${cellData.icon}`;
-                    thumbnail.append(image);
+            productItem: (data) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.classList.add('thumbnail');
+                const image = document.createElement('img');
+                image.src = `https://www.nespresso.com${data.icon}`;
+                thumbnail.append(image);
 
-                    const info = document.createElement('div');
-                    info.classList.add('info');
-                    const title = document.createElement('div');
-                    title.classList.add('item_title');
-                    const desc = document.createElement('div');
-                    desc.classList.add('item_desc');
-                    const buttonwrap = document.createElement('div');
-                    buttonwrap.classList.add('item_button_wrap');
+                const info = document.createElement('div');
+                info.classList.add('info');
+                const title = document.createElement('div');
+                title.classList.add('item_title');
+                const desc = document.createElement('div');
+                desc.classList.add('item_desc');
+                const buttonwrap = document.createElement('div');
+                buttonwrap.classList.add('item_button_wrap');
 
-                    title.innerHTML = cellData.name;
-                    desc.innerHTML = `
-                      <p>${cellData.capsuleProductAromatics.join(' ,')}</p>
-                      <p>${cellData.headline}</p>
+                title.innerHTML = data.name;
+                desc.innerHTML = `
+                      <p>${data.capsuleProductAromatics.join(' ,')}</p>
+                      <p>${data.headline}</p>
                     `;
 
-                    const price = document.createElement('div');
+                const price = document.createElement('div');
 
-                    price.classList.add('item_price');
+                price.classList.add('item_price');
 
-                    buttonwrap.append(price);
+                buttonwrap.append(price);
 
-                    const itemHandle = document.createElement('div');
-                    itemHandle.classList.add('item_handle');
+                const itemHandle = document.createElement('div');
+                itemHandle.classList.add('item_handle');
 
-                    const itemCntHandle = document.createElement('div');
-                    itemCntHandle.classList.add('item_cnt_handle');
+                const itemCntHandle = document.createElement('div');
+                itemCntHandle.classList.add('item_cnt_handle');
 
-                    const minusButton = document.createElement('button');
-                    minusButton.classList.add('minus_button');
-                    const count = document.createElement('p');
-                    const plusButton = document.createElement('button');
-                    plusButton.classList.add('plus_button');
+                const minusButton = document.createElement('button');
+                minusButton.classList.add('minus_button');
+                const count = document.createElement('p');
+                count.dataset.value = 1;
+                const plusButton = document.createElement('button');
+                plusButton.classList.add('plus_button');
 
-                    plusButton.addEventListener('click', () => {
-                        count.setAttribute('value', +count.getAttribute('value') + 1);
-                        renderCount();
-                    });
-
-                    count.setAttribute('value', 1);
-
-                    const renderCount = () => {
-                        price.textContent = `₩ ${(cellData.price * cellData.salesMultiple * +count.getAttribute('value')).toLocaleString()}`;
-                        count.textContent = `${+count.getAttribute('value')} (${+count.getAttribute('value') * cellData.salesMultiple})`;
-                    };
-
+                plusButton.addEventListener('click', () => {
+                    count.dataset.value = +count.dataset.value + 1;
                     renderCount();
-
-                    itemCntHandle.append(minusButton, count, plusButton);
-
-                    const itemCartButton = document.createElement('div');
-                    itemCartButton.classList.add('item_cart_button');
-
-                    itemHandle.append(itemCntHandle, itemCartButton);
-
-                    buttonwrap.append(price, itemHandle);
-
-                    info.append(title, desc, buttonwrap);
-
-                    cellData.prdEl = [thumbnail, info];
                 });
+
+                minusButton.addEventListener('click', () => {
+                    count.dataset.value = +count.dataset.value - 1;
+                    if (+count.dataset.value <= 0) count.dataset.value = 1;
+                    renderCount();
+                });
+
+                const renderCount = () => {
+                    price.textContent = `₩ ${(data.price * data.salesMultiple * +count.dataset.value).toLocaleString()}`;
+                    count.textContent = `${+count.dataset.value} (${+count.dataset.value * data.salesMultiple})`;
+                };
+
+                renderCount();
+
+                itemCntHandle.append(minusButton, count, plusButton);
+
+                const itemCartButton = document.createElement('div');
+                itemCartButton.classList.add('item_cart_button');
+
+                itemHandle.append(itemCntHandle, itemCartButton);
+
+                buttonwrap.append(price, itemHandle);
+
+                info.append(title, desc, buttonwrap);
+
+                return [thumbnail, info];
             },
             layerEl: (data) => {
                 data.forEach((cellData) => {
@@ -1449,6 +1459,65 @@ class CoffeeFinder {
 
                     tagsButton.append(tagsSpan);
                     this.filterTags.set(filter.filterKey, tagsButton);
+                });
+            },
+            pcSwiper: () => {
+                const pcSwiperConfig = (area) => {
+                    return {
+                        slidesPerView: 1,
+                        slidesPerGroup: 1,
+                        spaceBetween: 0,
+                        navigation: {
+                            prevEl: `.product_section_body.pc_only .product_section_category[name=${area}] .button-prev`,
+                            nextEl: `.product_section_body.pc_only .product_section_category[name=${area}] .button-next`,
+                        },
+                        breakpoints: {
+                            768: {
+                                slidesPerView: 1,
+                                spaceBetween: 25,
+                            },
+                            1280: {
+                                slidesPerView: 2,
+                                spaceBetween: 25,
+                            },
+                            1540: {
+                                slidesPerView: 3,
+                                spaceBetween: 25,
+                            },
+                        },
+                    };
+                };
+
+                const pcArticles = document.querySelectorAll('.product_section_body.pc_only .product_section_category');
+                pcArticles.forEach((el) => {
+                    const areaName = el.getAttribute('name');
+                    el.querySelector('.swiper-wrapper').innerHTML = '';
+                    let filterdData = [];
+                    switch (areaName) {
+                        case 'top_right':
+                            filterdData = this.data.filter((cf) => cf.properties[0] > 0 && cf.properties[1] < 0);
+                            break;
+                        case 'bottom_left':
+                            filterdData = this.data.filter((cf) => cf.properties[0] < 0 && cf.properties[1] > 0);
+                            break;
+                        case 'bottom_right':
+                            filterdData = this.data.filter((cf) => cf.properties[0] > 0 && cf.properties[1] > 0);
+                            break;
+                        case 'top_left':
+                            filterdData = this.data.filter((cf) => cf.properties[0] < 0 && cf.properties[1] < 0);
+                            break;
+                        case 'decaf':
+                            filterdData = this.data.filter((cf) => filterList.find((filter) => filter.filterKey === 'decaf').items.includes(cf.sku));
+                            break;
+                    }
+                    filterdData.forEach((data) => {
+                        const swiperItem = document.createElement('li');
+                        swiperItem.classList.add('swiper-slide');
+                        swiperItem.append(...this.setComponents().productItem(data));
+                        el.querySelector('.swiper-wrapper').append(swiperItem);
+                    });
+
+                    new Swiper(`.product_section_body.pc_only .product_section_category[name=${areaName}] .swiper`, pcSwiperConfig(areaName));
                 });
             },
         };
@@ -1580,32 +1649,6 @@ class CoffeeFinder {
     resetGrid() {
         return document.querySelectorAll(`.content .area button`).forEach((el) => (el.innerHTML = ''));
     }
-    render() {
-        this.resetGrid();
-        this.data
-            .filter((coffee) => {
-                if (this.filterData.size === 0) return true;
-                else {
-                    const filteredData = filterList.filter((filter2) => Array.from(this.filterData).includes(filter2.filterKey));
-                    return filteredData.some((el) => el.items.includes(coffee.sku));
-                }
-            })
-            .filter((coffee) => {
-                if (this.filterData.size === 0) {
-                    return !filterList.find((el) => el.filterKey === 'decaf').items.includes(coffee.sku);
-                } else {
-                    return true;
-                }
-            })
-            .forEach((coffee) => {
-                if (coffee.properties.length !== 2) return;
-                const [x, y] = coffee.properties;
-                const target = this.getCell(x, y);
-                if (!target) return;
-                target.innerHTML = ``;
-                target.append(...coffee.el);
-            });
-    }
 
     createMoItem(data3) {
         const result3 = data3.map((data) => {
@@ -1690,190 +1733,34 @@ class CoffeeFinder {
         return slide;
     }
 
+    render() {
+        this.resetGrid();
+        this.data
+            .filter((coffee) => {
+                if (this.filterData.size === 0) return true;
+                else {
+                    const filteredData = filterList.filter((filter2) => Array.from(this.filterData).includes(filter2.filterKey));
+                    return filteredData.some((el) => el.items.includes(coffee.sku));
+                }
+            })
+            .filter((coffee) => {
+                if (this.filterData.size === 0) {
+                    return !filterList.find((el) => el.filterKey === 'decaf').items.includes(coffee.sku);
+                } else {
+                    return true;
+                }
+            })
+            .forEach((coffee) => {
+                if (coffee.properties.length !== 2) return;
+                const [x, y] = coffee.properties;
+                const target = this.getCell(x, y);
+                if (!target) return;
+                target.innerHTML = ``;
+                target.append(...coffee.el);
+            });
+    }
+
     renderPrd() {
-        const pcArticles = document.querySelectorAll('.product_section_body.pc_only .product_section_category');
-        pcArticles.forEach((el) => {
-            el.querySelector('.swiper-wrapper').innerHTML = '';
-            switch (el.getAttribute('name')) {
-                case 'top_right':
-                    this.data
-                        .filter((cf) => {
-                            return cf.properties[0] > 0 && cf.properties[1] < 0;
-                        })
-                        .forEach((cf) => {
-                            const result = document.createElement('li');
-                            result.classList.add('swiper-slide');
-                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
-                            el.querySelector('.swiper-wrapper').append(result);
-                        });
-
-                    new Swiper('.product_section_body.pc_only .product_section_category[name=top_right] .swiper', {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 0,
-                        navigation: {
-                            prevEl: '.product_section_body.pc_only .product_section_category[name=top_right] .button-prev',
-                            nextEl: '.product_section_body.pc_only .product_section_category[name=top_right] .button-next',
-                        },
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 25,
-                            },
-                            1280: {
-                                slidesPerView: 2,
-                                spaceBetween: 25,
-                            },
-                            1540: {
-                                slidesPerView: 3,
-                                spaceBetween: 25,
-                            },
-                        },
-                    });
-                    break;
-                case 'bottom_left':
-                    this.data
-                        .filter((cf) => {
-                            return cf.properties[0] < 0 && cf.properties[1] > 0;
-                        })
-                        .forEach((cf) => {
-                            const result = document.createElement('li');
-                            result.classList.add('swiper-slide');
-                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
-                            el.querySelector('.swiper-wrapper').append(result);
-                        });
-                    new Swiper('.product_section_body.pc_only .product_section_category[name=bottom_left] .swiper', {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 0,
-                        navigation: {
-                            prevEl: '.product_section_body.pc_only .product_section_category[name=bottom_left] .button-prev',
-                            nextEl: '.product_section_body.pc_only .product_section_category[name=bottom_left] .button-next',
-                        },
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 25,
-                            },
-                            1280: {
-                                slidesPerView: 2,
-                                spaceBetween: 25,
-                            },
-                            1540: {
-                                slidesPerView: 3,
-                                spaceBetween: 25,
-                            },
-                        },
-                    });
-                    break;
-                case 'bottom_right':
-                    this.data
-                        .filter((cf) => {
-                            return cf.properties[0] > 0 && cf.properties[1] > 0;
-                        })
-                        .forEach((cf) => {
-                            const result = document.createElement('li');
-                            result.classList.add('swiper-slide');
-                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
-                            el.querySelector('.swiper-wrapper').append(result);
-                        });
-                    new Swiper('.product_section_body.pc_only .product_section_category[name=bottom_right] .swiper', {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 0,
-                        navigation: {
-                            prevEl: '.product_section_body.pc_only .product_section_category[name=bottom_right] .button-prev',
-                            nextEl: '.product_section_body.pc_only .product_section_category[name=bottom_right] .button-next',
-                        },
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 25,
-                            },
-                            1280: {
-                                slidesPerView: 2,
-                                spaceBetween: 25,
-                            },
-                            1540: {
-                                slidesPerView: 3,
-                                spaceBetween: 25,
-                            },
-                        },
-                    });
-                    break;
-                case 'top_left':
-                    this.data
-                        .filter((cf) => {
-                            return cf.properties[0] < 0 && cf.properties[1] < 0;
-                        })
-                        .forEach((cf) => {
-                            const result = document.createElement('li');
-                            result.classList.add('swiper-slide');
-                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
-                            el.querySelector('.swiper-wrapper').append(result);
-                        });
-                    new Swiper('.product_section_body.pc_only .product_section_category[name=top_left] .swiper', {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 0,
-                        navigation: {
-                            prevEl: '.product_section_body.pc_only .product_section_category[name=top_left] .button-prev',
-                            nextEl: '.product_section_body.pc_only .product_section_category[name=top_left] .button-next',
-                        },
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 25,
-                            },
-                            1280: {
-                                slidesPerView: 2,
-                                spaceBetween: 25,
-                            },
-                            1540: {
-                                slidesPerView: 3,
-                                spaceBetween: 25,
-                            },
-                        },
-                    });
-                    break;
-                case 'decaf':
-                    this.data
-                        .filter((cf) => {
-                            return filterList.find((filter) => filter.filterKey === 'decaf').items.includes(cf.sku);
-                        })
-                        .forEach((cf) => {
-                            const result = document.createElement('li');
-                            result.classList.add('swiper-slide');
-                            result.append(...cf.prdEl.map((el) => el.cloneNode(true)));
-                            el.querySelector('.swiper-wrapper').append(result);
-                        });
-                    new Swiper('.product_section_body.pc_only .product_section_category[name=decaf] .swiper', {
-                        slidesPerView: 1,
-                        slidesPerGroup: 1,
-                        spaceBetween: 0,
-                        navigation: {
-                            prevEl: '.product_section_body.pc_only .product_section_category[name=decaf] .button-prev',
-                            nextEl: '.product_section_body.pc_only .product_section_category[name=decaf] .button-next',
-                        },
-                        breakpoints: {
-                            768: {
-                                slidesPerView: 1,
-                                spaceBetween: 25,
-                            },
-                            1280: {
-                                slidesPerView: 2,
-                                spaceBetween: 25,
-                            },
-                            1540: {
-                                slidesPerView: 3,
-                                spaceBetween: 25,
-                            },
-                        },
-                    });
-                    break;
-            }
-        });
-
         const moArticles = document.querySelectorAll('.product_section_body.mo_only .product_section_category_item_list');
 
         moArticles.forEach((el) => {
