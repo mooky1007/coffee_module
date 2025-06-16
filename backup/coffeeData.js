@@ -1229,8 +1229,6 @@ class CoffeeFinder {
                     this.cells.bottomLeft = document.querySelectorAll('.content .area .bottom_left button');
                 };
 
-                // x1, y1, x2, y2
-
                 const setAreaGridPosition = () => {
                     this.setGridPosition(this.cells.topLeft, -5, -1, -4, -1);
                     this.setGridPosition(this.cells.topRight, -5, -1, 1, 4);

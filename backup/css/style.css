@@ -6,8 +6,7 @@
     display: none !important;
 }
 #quadrantCoffee sup {
-    /* vertical-align: super; */
-    top: -3px;
+    top: -0.4em;
     position: relative;
     font-size: smaller;
 }
@@ -390,7 +389,7 @@
     flex: 0 0 20%;
     min-height: 0;
     position: relative;
-    top: -10%;
+    top: -5%;
 }
 
 #quadrantCoffee .key_body .content .area > div button .info p {
@@ -1578,9 +1577,14 @@
     #quadrantCoffee .key_section h2 {
         font-size: 5.71vw;
         line-height: 8.21vw;
+        font-weight: 400;
         letter-spacing: -0.07em;
 
         color: #000000;
+    }
+
+    #quadrantCoffee .key_section h2 span {
+        font-weight: 700;
     }
 
     #quadrantCoffee .inner-996 {
@@ -1866,6 +1870,7 @@
     }
 
     #quadrantCoffee .key_body .content .area > div button .capsule {
+        flex: 0 0 100%;
     }
 
     #quadrantCoffee .key_body .content .area > div button .info {
