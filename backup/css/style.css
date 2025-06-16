@@ -1444,13 +1444,6 @@
     justify-content: center;
 
     flex: 1 0 20px;
-    -moz-appearance: textfield;
-}
-
-#quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cnt_handle input::-webkit-outer-spin-button,
-#quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cnt_handle input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
 }
 
 #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cart_button {
@@ -1546,6 +1539,10 @@
 @media screen and (max-width: 768px) {
     #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cnt_handle > p {
         font-size: 3.9vw;
+        flex: 1 1 3.57vw;
+    }
+    #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cnt_handle [class*='_button'] {
+        flex: 0 0 4.28vw;
     }
 
     #quadrantCoffee .bedge {
@@ -1658,7 +1655,7 @@
         width: 7.14vw;
         height: 7.14vw;
     }
-    
+
     #quadrantCoffee .key_body .content.top_right {
         transform: scale(1.8) translate(-22%, 22%);
     }
@@ -2048,7 +2045,13 @@
         height: 100%;
     }
 
+    #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap {
+        gap: 0;
+    }
+
     #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_handle {
+        flex: 1 1 0;
+        gap: 0;
         height: auto;
     }
 
@@ -2189,18 +2192,19 @@
     #quadrantCoffee .product_section_category {
         padding: 0;
     }
+
     #quadrantCoffee .product_section_category_item_list li {
         padding: 5.3vw 7.14vw 3.5vw;
-        flex: 1 0 0;
     }
     #quadrantCoffee .product_section_category_item_list li .thumbnail {
         width: 21.4vw;
         height: 21.4vw;
     }
     #quadrantCoffee .product_section_category_item_list li .info {
+        width: 100%;
         height: auto;
         flex: 1 0 0;
-        gap: 0.89vw;
+        gap: 0.8vw;
     }
 
     #quadrantCoffee .product_section_category_item_list li .info .bedge {
@@ -2228,9 +2232,13 @@
         line-height: 3.3vw;
     }
 
+    #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_cnt_handle [class*='_button'] {
+        flex: 0 1 24px;
+    }
+
     #quadrantCoffee .product_section_category_item_list li .info .item_button_wrap .item_price {
         font-size: 3.9vw;
-        /* line-height: 4.6vw; */
+        flex: 0 1 auto;
     }
 }
 
