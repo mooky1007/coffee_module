@@ -314,7 +314,7 @@
 #quadrantCoffee .key_body .content .area > div {
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 10px 20px;
     width: 440px;
@@ -407,6 +407,14 @@
     white-space: nowrap;
 
     color: #000000;
+    display: none;
+}
+
+#quadrantCoffee .key_body .content.top_right .area > div button .info p,
+#quadrantCoffee .key_body .content.top_left .area > div button .info p,
+#quadrantCoffee .key_body .content.bottom_right .area > div button .info p,
+#quadrantCoffee .key_body .content.bottom_left .area > div button .info p {
+    display: block;
 }
 
 #quadrantCoffee .key_body .content .area .top_right {
@@ -816,7 +824,7 @@
 #quadrantCoffee .filter_body {
     display: flex;
     width: 100%;
-    max-height: 300px;
+    max-height: 360px;
     transition: 0.4s ease-in-out;
 }
 
@@ -957,6 +965,11 @@
     background-size: 30px;
 }
 
+#quadrantCoffee .filter_body i.ico_flavored::after {
+    background-image: url('./images/ico_flavored.png');
+    background-size: 30px;
+}
+
 #quadrantCoffee .filter_body label:has(input[name='ico_all']:checked) {
     border: 2px solid #513223;
     background: #fff;
@@ -1010,6 +1023,12 @@
 }
 #quadrantCoffee .filter_body label:has(input[name='ico_milk']:checked) i {
     background: #d3ab89;
+}
+#quadrantCoffee .filter_body label:has(input[name='ico_flavored']:checked) span {
+    color: #d3ab89;
+}
+#quadrantCoffee .filter_body label:has(input[name='ico_flavored']:checked) i {
+    background: #cf5517;
 }
 
 #quadrantCoffee .product_section {
@@ -1078,7 +1097,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    text-align: center;
+    text-align: left;
     letter-spacing: -0.05em;
 
     color: #000000;
@@ -1674,12 +1693,12 @@
     }
 
     #quadrantCoffee .key_body .content .area_rect > div span {
-        font-size: 2.85vw;
+        font-size: 1.85vw;
     }
 
     #quadrantCoffee .key_body .content .area_rect > div i {
-        width: 4.65vw;
-        height: 4.65vw;
+        width: 3vw;
+        height: 3vw;
     }
 
     #quadrantCoffee .key_body .content .area_rect.right > div,
@@ -1689,8 +1708,8 @@
 
     #quadrantCoffee .key_body .content .area_rect.right > div i,
     #quadrantCoffee .key_body .content .area_rect.left > div i {
-        width: 6.7vw;
-        height: 6.7vw;
+        width: 4vw;
+        height: 4vw;
     }
 
     #quadrantCoffee .move_area button.top,
@@ -1839,31 +1858,31 @@
     }
 
     #quadrantCoffee .key_body .content .area {
-        width: 78.57vw;
-        height: 78.57vw;
+        width: 90vw;
+        height: 90vw;
     }
 
     #quadrantCoffee .key_body .content .area > div {
-        width: 35vw;
-        height: 35vw;
-        gap: 1.45vw 1.78vw;
+        width: 44vw;
+        height: 44vw;
+        gap: 2vw 2vw;
     }
 
     #quadrantCoffee .key_body .content .area .top_right {
-        top: 2.48vw;
-        right: 1.09vw;
+        top: -2vw;
+        right: -2vw;
     }
     #quadrantCoffee .key_body .content .area .top_left {
-        top: 2.48vw;
-        left: 1.09vw;
+        top: -2vw;
+        left: -2vw;
     }
     #quadrantCoffee .key_body .content .area .bottom_right {
-        bottom: 2.48vw;
-        right: 1.09vw;
+        bottom: -2vw;
+        right: -2vw;
     }
     #quadrantCoffee .key_body .content .area .bottom_left {
-        bottom: 2.48vw;
-        left: 1.09vw;
+        bottom: -2vw;
+        left: -2vw;
     }
 
     #quadrantCoffee .key_body .content .area > div button {
@@ -1881,9 +1900,10 @@
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.02vw;
-        line-height: 1.25vw;
+        transform: translateX(-50%) scale(0.5);
+        font-size: 2.4vw !important;
+        transform-origin: center top;
+        line-height: 2.6vw;
     }
 
     #quadrantCoffee .key_section .button_wrap {
@@ -1977,6 +1997,12 @@
     }
 
     #quadrantCoffee .filter_body i.ico_milk::after {
+        width: 5.35vw;
+        height: 5.35vw;
+        background-size: 5.35vw;
+    }
+
+    #quadrantCoffee .filter_body i.ico_flavored::after {
         width: 5.35vw;
         height: 5.35vw;
         background-size: 5.35vw;
